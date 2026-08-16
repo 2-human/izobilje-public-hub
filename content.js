@@ -73,6 +73,10 @@ window.HUB = {
       { view: "website", label: "izobilje.com", badge: 14,
         icon: "<svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6'><circle cx='12' cy='12' r='9'/><path d='M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18'/></svg>" },
     ]},
+    { section: "Emails", items: [
+      { view: "planting", label: "Reforestation signup", badge: 1,
+        icon: "<svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6'><rect x='3' y='5' width='18' height='14' rx='2'/><path d='M3 7l9 6 9-6'/></svg>" },
+    ]},
     { section: "Governance", items: [
       { view: "decisions", label: "Decisions & open questions",
         icon: "<svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6'><path d='M5 4h11l3 3v13H5z'/><path d='M9 10h6M9 14h4'/></svg>" },
@@ -85,6 +89,8 @@ window.HUB = {
     audiences: { title: "Who it's for", sub: "The people the work is aimed at, in tiers" },
     website:   { title: "izobilje.com", sub: "14 routes, 5 languages, rendered from the repo",
                  open: WEB, openLabel: "Open the site ↗", tbBadge: "Live mirror", infoPane: true },
+    planting:  { title: "Reforestation signup", sub: "Autoresponse, and the form that triggers it",
+                 open: WEB + "events/", openLabel: "Open the form ↗", tbBadge: "Live" },
     decisions: { title: "Decisions & open questions", sub: "What is settled, and what is not" },
   },
 
@@ -260,6 +266,93 @@ window.HUB = {
 
     /* ---------------------------------------------------------------- website */
     website: `<iframe title="izobilje.com" src="${WEB}"></iframe>`,
+
+    /* --------------------------------------------------------------- planting */
+    planting: `
+    <div class="brief">
+      <p class="brief__eyebrow">Emails &middot; autoresponse</p>
+      <h1>Reforestation signup</h1>
+      <p class="brief__lede">An email only means something next to the thing that triggers it. This
+      view pairs the autoresponse with the registration form that sends it, so the two are read and
+      changed together rather than drifting apart.</p>
+      <div class="brief__body">
+        <p>The email is live: people who register for the Deliblatska peščara reforestation action
+        receive it today. Its canonical text lives in the private repo at
+        <span class="mono">content/email/planting-signup-autoresponse/EMAIL.md</span>.</p>
+      </div>
+
+      <div class="state">
+        <div class="state__row"><div class="state__k">Triggered by</div>
+          <div class="state__v"><b>plantingSignup</b>, the registration form on the
+          <b>/events</b> page. Its copy is canonical in
+          <span class="mono">pages/events/PAGE.md</span> in all five languages.</div></div>
+        <div class="state__row"><div class="state__k">Form fields</div>
+          <div class="state__v">Ime, Email, Telefon (optional), Broj učesnika, Željeni termini,
+          Dodatna napomena. These are the only values this email could ever personalise from.</div></div>
+        <div class="state__row"><div class="state__k">Sender</div>
+          <div class="state__v">Jovan, Šumski Mir. The email is signed by a sub-brand rather than by
+          Izobilje, which is consistent with how the land-facing offers are named.</div></div>
+        <div class="state__row"><div class="state__k">Language</div>
+          <div class="state__v">Serbian only, although the form it answers is published in five
+          languages.</div></div>
+        <div class="state__row"><div class="state__k">Sequence</div>
+          <div class="state__v">1 of a promised 2. The body commits to a second email at the end of
+          September; that one does not exist yet.</div></div>
+      </div>
+
+      <div class="ledger" style="padding:1.6rem 1.8rem;line-height:1.65">
+        <p>Hvala ti puno na prijavi i želji da se uključiš u akciju obnove Deliblatske peščare! 🌱🌲</p>
+        <p>Akcija je planirana za kraj oktobra, a čim utvrdimo tačan datum i detalje, obavestićemo
+        sve prijavljene blagovremeno.</p>
+        <p>Krajem septembra poslaćemo dodatni email sa informacijama o akciji, organizaciji dolaska,
+        potrebnoj opremi i aktivnostima.</p>
+        <p>Do tada, svaki vid podrške nam mnogo znači. Posebno nam pomaže ako podeliš informacije o
+        akciji na svojim društvenim mrežama i pozoveš prijatelje i kolege da se uključe. Veća
+        vidljivost znači i više ljudi koji mogu doprineti obnovi Deliblatske peščare. 💚</p>
+        <p>Za naredne objave, volonterske akcije i obaveštenja:</p>
+        <p>🌲 WhatsApp komuna<br>📅 Događaji<br>📲 Instagram</p>
+        <p>Tu ćemo redovno objavljivati nove informacije i lakše koordinisati zajednicu kako
+        projekat bude napredovao.</p>
+        <p>U prilogu ti šaljemo i plakat za prikupljanje donacija za obnovu šume. Slobodno ga
+        odštampaj i podeli sa lokalima i biznisima koji su voljni da podrže akciju obnove. Najbolje
+        ga je postaviti na vidno mesto u objektu gde je najveća cirkulacija ljudi.</p>
+        <p>Hvala ti što želiš da budeš deo ove priče. Vidimo se u šumi! 🌲</p>
+        <p>Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p>
+      </div>
+
+      <div class="brief__body">
+        <h2>What it commits us to</h2>
+        <p>Two dated promises, both of which create work that does not exist yet: a <b>second email
+        at the end of September</b> carrying logistics, equipment and activities, and a
+        <b>confirmed date announcement</b> once late October is fixed.</p>
+        <h2>Open items</h2>
+      </div>
+
+      <div class="state">
+        <div class="state__row"><div class="state__k">The rebuilt site cannot send it</div>
+          <div class="state__v">In the repo-rendered site the form is copy with no backend, so a
+          registration is never captured and this autoresponse never fires. Only the live Lovable
+          build can trigger it today. This is the same gap the planned database closes.</div></div>
+        <div class="state__row"><div class="state__k">No subject line</div>
+          <div class="state__v">The body was supplied without one, so what lands in the inbox is
+          unrecorded.</div></div>
+        <div class="state__row"><div class="state__k">Three links are unresolved</div>
+          <div class="state__v">WhatsApp komuna, Događaji and Instagram appear as labels. Only
+          Događaji has an obvious destination. The one Instagram URL in the site canon is
+          <span class="mono">instagram.com/vikendizam/</span>, a different handle that may not be
+          the right account; the WhatsApp group link appears nowhere in the repo.</div></div>
+        <div class="state__row"><div class="state__k">The poster is missing</div>
+          <div class="state__v">The email refers to an attached donation poster. That file is not in
+          the repo, so the attachment cannot be reproduced or reprinted from here.</div></div>
+        <div class="state__row"><div class="state__k">Serbian only</div>
+          <div class="state__v">A registrant who used the English, German, Dutch or French form
+          still receives this in Serbian.</div></div>
+      </div>
+
+      <div class="brief__foot"><span class="brief__num">&rarr;</span>
+        <span>One email, one form. As more autoresponses arrive, each gets a view named for its
+        form, holding that form's whole sequence.</span></div>
+    </div>`,
 
     /* -------------------------------------------------------------- decisions */
     decisions: `
