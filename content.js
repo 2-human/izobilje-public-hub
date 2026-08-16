@@ -273,81 +273,36 @@ I18N.en = {
 
     /* ---------------------------------------------------------------- contact */
     contact: `
-      <div class="brief">
-      <p class="brief__eyebrow">Emails &middot; contact form</p><h1>Contact form</h1><p class="brief__lede">The contact form on izobilje.com offers seven subjects. Each subject gets its own autoresponse, modelled on the existing reforestation reply. All seven are here, each paired with the subject that triggers it.</p>
-      <div class="brief__body"><p>The subjects are taken straight from the live form and already exist in all five languages. These replies are drafts for approval; none is in use yet.</p></div>
-      <div class="brief__sec"><span class="brief__num">01</span><div>
-      <h2>Šumski Mir partnership</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Subject: <b>Šumski Mir partnerstvo</b> &middot; An organisation, business or institution proposing to work together.</p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Thank you for your interest in working with Šumski Mir. 🌲</p>
-      <p style="margin:0 0 .85rem">We cannot restore Deliblatska peščara on our own. We work with institutions, businesses and organisations that want to support afforestation, sustainable agriculture and community work.</p>
-      <p style="margin:0 0 .85rem">So we can answer you concretely, tell us in a few sentences what you do, what you have in mind, and over what timeframe. If you have a CSR programme or an annual support budget, mention that too.</p>
-      <p style="margin:0 0 .85rem">We will come back to you within a few working days with a proposal for what the collaboration could look like.</p>
-      <p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">02</span><div>
-      <h2>Donation &amp; Support</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Subject: <b>Donacija i podrška</b> &middot; Someone offering money, materials or other support.</p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Thank you for wanting to support the restoration of Deliblatska peščara. 💚</p>
-      <p style="margin:0 0 .85rem">Our work runs on donations. Funds go into seedlings, the nursery where we grow future forests, and the organisation of shared planting days.</p>
-      <p style="margin:0 0 .85rem">We will come back to you with the ways to donate and with what your support covers specifically.</p>
-      <p style="margin:0 0 .85rem">If you would like to help without donating, it means a great deal if you share the action with friends, colleagues and local businesses. We are glad to send you a poster you can print and put up somewhere visible.</p>
-      <p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">03</span><div>
-      <h2>Event inquiry</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Subject: <b>Upit o događaju</b> &middot; Someone asking about gatherings, workshops or planting days.</p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Thank you for asking about our events. 🌱</p>
-      <p style="margin:0 0 .85rem">Through the year we run tree planting, workshops, yoga sessions and seasonal community gatherings. Dates depend on the season and the weather, so we publish them once they are confirmed.</p>
-      <p style="margin:0 0 .85rem">Tell us which kind of event interests you and whether you are coming alone or with a group, and we will send you the next available dates.</p>
-      <p style="margin:0 0 .85rem">For announcements and new actions, follow us on Instagram, where we post what is coming up.</p>
-      <p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">04</span><div>
-      <h2>Camping Inquiry</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Subject: <b>Upit o kampu</b> &middot; Someone asking about staying at the camp, including overland and RV.</p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Thank you for asking about the camp. ⛺</p>
-      <p style="margin:0 0 .85rem">Šumski Mir Co-Working Camp has secluded pitches among the trees, a shared equipped kitchen, a firepit for evening gatherings, reliable internet across the camp and secure parking. The approach is paved, so the camp is reachable by campervan, RV and bicycle.</p>
-      <p style="margin:0 0 .85rem">You pay what you feel and what you can. We would rather you came than let the price keep you away.</p>
-      <p style="margin:0 0 .85rem">Send us your preferred dates, how many people, and whether you are arriving by vehicle or with a tent, and we will confirm availability.</p>
-      <p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">05</span><div>
-      <h2>Ranch related activities</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Subject: <b>Aktivnosti vezane za ranč</b> &middot; Someone asking about the farm, volunteering or the technology work.</p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Thank you for your interest in the ranch. 🚜</p>
-      <p style="margin:0 0 .85rem">At the ranch we work on shared gardening, afforestation and the use of modern technology in farming, including drones and sensors. Part of that work is done alongside volunteers and partners.</p>
-      <p style="margin:0 0 .85rem">Tell us whether you are interested in volunteering, a visit, a collaboration or something specific from our work, and how much time you have.</p>
-      <p style="margin:0 0 .85rem">We will come back with dates and with what we most need help on right now.</p>
-      <p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">06</span><div>
-      <h2>Honey order</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Subject: <b>Narudžbina meda</b> &middot; Someone ordering honey.</p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Thank you for your interest in our honey. 🍯</p>
-      <p style="margin:0 0 .85rem">Our honey is pure, raw and unfiltered, collected from the apiaries in the forest around Šumski Mir. Quantities are limited and depend on the season.</p>
-      <p style="margin:0 0 .85rem">Tell us how many jars you would like and where you are, and we will confirm availability, price and whether you collect or we ship.</p>
-      <p style="margin:0 0 .85rem">If you are able to visit, the nicest way is to collect it here and see where it comes from.</p>
-      <p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">07</span><div>
-      <h2>Other</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Subject: <b>Ostalo</b> &middot; Anything that does not fit the six subjects above.</p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Thank you for writing to us. 🌲</p>
-      <p style="margin:0 0 .85rem">We have received your message and will come back to you within a few working days.</p>
-      <p style="margin:0 0 .85rem">If it is urgent, you can also reach us by phone.</p>
-      <p style="margin:0 0 .85rem">In the meantime, we post all announcements, actions and news on Instagram.</p>
-      <p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__foot"><span class="brief__num">7</span><span>Seven replies, one form. None has been sent yet.</span></div>
-      </div>`,
+      <style>
+      /* Predmet switcher: CSS-only radio tabs. No JavaScript, so nothing depends on the
+         chassis re-running anything after it injects this HTML. */
+      .pm-field{margin:1.4rem 0 .5rem}
+      .pm-label{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+        color:var(--ink-muted);margin-bottom:.6rem}
+      .pm input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+      .pm-tabs{display:flex;flex-wrap:wrap;gap:.4rem}
+      .pm-tabs label{border:1px solid var(--hairline);background:#fff;border-radius:999px;
+        padding:.45rem .95rem;font-size:.85rem;font-weight:600;color:var(--ink);cursor:pointer;
+        transition:background .12s,color .12s,border-color .12s}
+      .pm-tabs label:hover{border-color:var(--accent)}
+      .pm-panel{display:none}
+      .pm-count{font-size:.78rem;color:var(--ink-muted);margin:.9rem 0 0}
+      #pm1:checked ~ .pm-field .pm-tabs label[for=pm1]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm1:checked ~ .pm-panels #pmp1{display:block}
+      #pm2:checked ~ .pm-field .pm-tabs label[for=pm2]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm2:checked ~ .pm-panels #pmp2{display:block}
+      #pm3:checked ~ .pm-field .pm-tabs label[for=pm3]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm3:checked ~ .pm-panels #pmp3{display:block}
+      #pm4:checked ~ .pm-field .pm-tabs label[for=pm4]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm4:checked ~ .pm-panels #pmp4{display:block}
+      #pm5:checked ~ .pm-field .pm-tabs label[for=pm5]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm5:checked ~ .pm-panels #pmp5{display:block}
+      #pm6:checked ~ .pm-field .pm-tabs label[for=pm6]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm6:checked ~ .pm-panels #pmp6{display:block}
+      #pm7:checked ~ .pm-field .pm-tabs label[for=pm7]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm7:checked ~ .pm-panels #pmp7{display:block}
+    </style>
+      <div class="brief"><p class="brief__eyebrow">Emails &middot; contact form</p><h1>Contact form</h1><p class="brief__lede">The contact form on izobilje.com offers seven subjects. Each subject gets its own autoresponse. Switch the subject below to read the reply it triggers.</p><div class="brief__body"><p>The subjects are read straight off the live form and already exist in all five languages. The replies are drafts for approval; none has been sent.</p></div><div class="pm"><input type="radio" name="pm" id="pm1" checked><input type="radio" name="pm" id="pm2"><input type="radio" name="pm" id="pm3"><input type="radio" name="pm" id="pm4"><input type="radio" name="pm" id="pm5"><input type="radio" name="pm" id="pm6"><input type="radio" name="pm" id="pm7"><div class="pm-field"><div class="pm-label">Predmet (subject)</div><div class="pm-tabs"><label for="pm1">Šumski Mir partnership</label><label for="pm2">Donation &amp; Support</label><label for="pm3">Event inquiry</label><label for="pm4">Camping Inquiry</label><label for="pm5">Ranch related activities</label><label for="pm6">Honey order</label><label for="pm7">Other</label></div></div><div class="pm-panels"><div class="pm-panel" id="pmp1"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Šumski Mir partnership</b> &middot; An organisation, business or institution proposing to work together.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for your interest in working with Šumski Mir. 🌲</p><p style="margin:0 0 .85rem">We cannot restore Deliblatska peščara on our own. We work with institutions, businesses and organisations that want to support afforestation, sustainable agriculture and community work.</p><p style="margin:0 0 .85rem">So we can answer you concretely, tell us in a few sentences what you do, what you have in mind, and over what timeframe. If you have a CSR programme or an annual support budget, mention that too.</p><p style="margin:0 0 .85rem">We will come back to you within a few working days with a proposal for what the collaboration could look like.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 1 of 7</p></div><div class="pm-panel" id="pmp2"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Donation &amp; Support</b> &middot; Someone offering money, materials or other support.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for wanting to support the restoration of Deliblatska peščara. 💚</p><p style="margin:0 0 .85rem">Our work runs on donations. Funds go into seedlings, the nursery where we grow future forests, and the organisation of shared planting days.</p><p style="margin:0 0 .85rem">We will come back to you with the ways to donate and with what your support covers specifically.</p><p style="margin:0 0 .85rem">If you would like to help without donating, it means a great deal if you share the action with friends, colleagues and local businesses. We are glad to send you a poster you can print and put up somewhere visible.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 2 of 7</p></div><div class="pm-panel" id="pmp3"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Event inquiry</b> &middot; Someone asking about gatherings, workshops or planting days.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for asking about our events. 🌱</p><p style="margin:0 0 .85rem">Through the year we run tree planting, workshops, yoga sessions and seasonal community gatherings. Dates depend on the season and the weather, so we publish them once they are confirmed.</p><p style="margin:0 0 .85rem">Tell us which kind of event interests you and whether you are coming alone or with a group, and we will send you the next available dates.</p><p style="margin:0 0 .85rem">For announcements and new actions, follow us on Instagram, where we post what is coming up.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 3 of 7</p></div><div class="pm-panel" id="pmp4"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Camping Inquiry</b> &middot; Someone asking about staying at the camp, including overland and RV.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for asking about the camp. ⛺</p><p style="margin:0 0 .85rem">Šumski Mir Co-Working Camp has secluded pitches among the trees, a shared equipped kitchen, a firepit for evening gatherings, reliable internet across the camp and secure parking. The approach is paved, so the camp is reachable by campervan, RV and bicycle.</p><p style="margin:0 0 .85rem">You pay what you feel and what you can. We would rather you came than let the price keep you away.</p><p style="margin:0 0 .85rem">Send us your preferred dates, how many people, and whether you are arriving by vehicle or with a tent, and we will confirm availability.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 4 of 7</p></div><div class="pm-panel" id="pmp5"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Ranch related activities</b> &middot; Someone asking about the farm, volunteering or the technology work.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for your interest in the ranch. 🚜</p><p style="margin:0 0 .85rem">At the ranch we work on shared gardening, afforestation and the use of modern technology in farming, including drones and sensors. Part of that work is done alongside volunteers and partners.</p><p style="margin:0 0 .85rem">Tell us whether you are interested in volunteering, a visit, a collaboration or something specific from our work, and how much time you have.</p><p style="margin:0 0 .85rem">We will come back with dates and with what we most need help on right now.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 5 of 7</p></div><div class="pm-panel" id="pmp6"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Honey order</b> &middot; Someone ordering honey.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for your interest in our honey. 🍯</p><p style="margin:0 0 .85rem">Our honey is pure, raw and unfiltered, collected from the apiaries in the forest around Šumski Mir. Quantities are limited and depend on the season.</p><p style="margin:0 0 .85rem">Tell us how many jars you would like and where you are, and we will confirm availability, price and whether you collect or we ship.</p><p style="margin:0 0 .85rem">If you are able to visit, the nicest way is to collect it here and see where it comes from.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 6 of 7</p></div><div class="pm-panel" id="pmp7"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Other</b> &middot; Anything that does not fit the six subjects above.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for writing to us. 🌲</p><p style="margin:0 0 .85rem">We have received your message and will come back to you within a few working days.</p><p style="margin:0 0 .85rem">If it is urgent, you can also reach us by phone.</p><p style="margin:0 0 .85rem">In the meantime, we post all announcements, actions and news on Instagram.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 7 of 7</p></div></div></div><div class="brief__foot"><span class="brief__num">7</span><span>Seven replies, one form. None has been sent yet.</span></div></div>`,
 
     /* -------------------------------------------------------------- decisions */
     decisions: `
@@ -423,81 +378,36 @@ I18N.en = {
    translation is safe to ship. */
 I18N.sr = {
   contact: `
-      <div class="brief">
-      <p class="brief__eyebrow">Emails &middot; kontakt forma</p><h1>Kontakt forma</h1><p class="brief__lede">Kontakt forma na izobilje.com nudi sedam predmeta. Svaki predmet dobija svoj automatski odgovor, po uzoru na postojeći odgovor za prijavu za sadnju. Ovde su svih sedam, uz predmet koji ih pokreće.</p>
-      <div class="brief__body"><p>Predmeti su preuzeti direktno iz forme na sajtu i postoje na svih pet jezika. Odgovori su nacrti za odobrenje, nisu još u upotrebi.</p></div>
-      <div class="brief__sec"><span class="brief__num">01</span><div>
-      <h2>Šumski Mir partnerstvo</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Predmet: <b>Šumski Mir partnerstvo</b></p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Hvala ti na interesovanju za saradnju sa Šumskim Mirom! 🌲</p>
-      <p style="margin:0 0 .85rem">Obnovu Deliblatske peščare ne možemo izvesti sami. Sarađujemo sa institucijama, firmama i organizacijama koje žele da podrže pošumljavanje, održivu poljoprivredu i rad sa zajednicom.</p>
-      <p style="margin:0 0 .85rem">Da bismo ti odgovorili konkretno, javi nam u nekoliko rečenica: čime se baviš, šta imaš na umu i u kom vremenskom okviru. Ako imate CSR program ili godišnji budžet za podršku, napomeni i to.</p>
-      <p style="margin:0 0 .85rem">Javićemo se u roku od nekoliko radnih dana sa predlogom kako bi saradnja mogla da izgleda.</p>
-      <p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">02</span><div>
-      <h2>Donacija i podrška</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Predmet: <b>Donacija i podrška</b></p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Hvala ti puno na želji da podržiš obnovu Deliblatske peščare! 💚</p>
-      <p style="margin:0 0 .85rem">Naš rad je zasnovan na donacijama. Sredstva idu u sadnice, rasadnik iz kog uzgajamo buduće šume i organizaciju zajedničkih akcija sadnje.</p>
-      <p style="margin:0 0 .85rem">Javićemo ti se sa detaljima o načinima donacije i o tome šta konkretno tvoja podrška pokriva.</p>
-      <p style="margin:0 0 .85rem">Ako želiš da pomogneš i bez donacije, mnogo nam znači ako podeliš informacije o akciji sa prijateljima, kolegama i lokalnim biznisima. Rado ti šaljemo plakat koji možeš odštampati i postaviti na vidno mesto.</p>
-      <p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">03</span><div>
-      <h2>Upit o događaju</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Predmet: <b>Upit o događaju</b></p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Hvala ti na upitu o našim događajima! 🌱</p>
-      <p style="margin:0 0 .85rem">Kroz godinu organizujemo sadnju drveća, radionice, joga sesije i sezonska okupljanja zajednice. Termini zavise od godišnjeg doba i vremenskih uslova, pa ih objavljujemo kada su potvrđeni.</p>
-      <p style="margin:0 0 .85rem">Javi nam koji te tip događaja zanima i da li dolaziš sam ili sa grupom, pa ćemo ti poslati prve slobodne termine.</p>
-      <p style="margin:0 0 .85rem">Za sve najave i nove akcije prati nas na Instagramu, gde redovno objavljujemo šta se sprema.</p>
-      <p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">04</span><div>
-      <h2>Upit o kampu</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Predmet: <b>Upit o kampu</b></p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Hvala ti na upitu o kampu! ⛺</p>
-      <p style="margin:0 0 .85rem">Šumski Mir Co-Working Camp nudi izolovana mesta među drvećem, zajedničku opremljenu kuhinju, ognjište za večernja okupljanja, pouzdan internet u celom kampu i siguran parking. Prilaz je asfaltiran, pa je kamp dostupan i za kampere, RV vozila i bicikle.</p>
-      <p style="margin:0 0 .85rem">Kod nas plaćaš koliko želiš i koliko možeš. Radije bismo da dođeš nego da te cena zadrži.</p>
-      <p style="margin:0 0 .85rem">Javi nam željene datume, broj ljudi i da li dolaziš vozilom ili šatorom, pa ćemo ti potvrditi da li imamo mesta.</p>
-      <p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">05</span><div>
-      <h2>Aktivnosti vezane za ranč</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Predmet: <b>Aktivnosti vezane za ranč</b></p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Hvala ti na interesovanju za ranč! 🚜</p>
-      <p style="margin:0 0 .85rem">Na ranču se bavimo zajedničkim baštovanstvom, pošumljavanjem i primenom savremene tehnologije u poljoprivredi, uključujući dronove i senzore. Deo posla radimo zajedno sa volonterima i partnerima.</p>
-      <p style="margin:0 0 .85rem">Javi nam da li te zanima volontiranje, poseta, saradnja ili nešto konkretno iz našeg rada, i koliko vremena imaš na raspolaganju.</p>
-      <p style="margin:0 0 .85rem">Javićemo ti se sa terminima i sa onim što nam je trenutno najpotrebnije.</p>
-      <p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">06</span><div>
-      <h2>Narudžbina meda</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Predmet: <b>Narudžbina meda</b></p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Hvala ti na interesovanju za naš med! 🍯</p>
-      <p style="margin:0 0 .85rem">Naš med je čist, sirov i nefiltriran, sakupljen iz pčelinjaka u šumi oko Šumskog Mira. Količine su ograničene i zavise od sezone.</p>
-      <p style="margin:0 0 .85rem">Javi nam koliko tegli želiš i gde se nalaziš, pa ćemo ti potvrditi dostupnost, cenu i način preuzimanja ili slanja.</p>
-      <p style="margin:0 0 .85rem">Ako si u prilici da svratiš, najlepše je preuzeti med kod nas i videti odakle dolazi.</p>
-      <p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__sec"><span class="brief__num">07</span><div>
-      <h2>Ostalo</h2>
-      <p class="svc__tags" style="margin-bottom:.9rem">Predmet: <b>Ostalo</b></p>
-      <div class="ledger" style="padding:1.4rem 1.6rem;line-height:1.6">
-      <p style="margin:0 0 .85rem">Hvala ti što si nam pisao! 🌲</p>
-      <p style="margin:0 0 .85rem">Primili smo tvoju poruku i javićemo ti se u roku od nekoliko radnih dana.</p>
-      <p style="margin:0 0 .85rem">Ako je u pitanju nešto hitno, možeš nas dobiti i telefonom.</p>
-      <p style="margin:0 0 .85rem">U međuvremenu, sve najave, akcije i novosti objavljujemo na Instagramu.</p>
-      <p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p>
-      </div></div></div>
-      <div class="brief__foot"><span class="brief__num">7</span><span>Sedam odgovora, jedna forma. Nijedan još nije poslat.</span></div>
-      </div>`,
+      <style>
+      /* Predmet switcher: CSS-only radio tabs. No JavaScript, so nothing depends on the
+         chassis re-running anything after it injects this HTML. */
+      .pm-field{margin:1.4rem 0 .5rem}
+      .pm-label{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+        color:var(--ink-muted);margin-bottom:.6rem}
+      .pm input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+      .pm-tabs{display:flex;flex-wrap:wrap;gap:.4rem}
+      .pm-tabs label{border:1px solid var(--hairline);background:#fff;border-radius:999px;
+        padding:.45rem .95rem;font-size:.85rem;font-weight:600;color:var(--ink);cursor:pointer;
+        transition:background .12s,color .12s,border-color .12s}
+      .pm-tabs label:hover{border-color:var(--accent)}
+      .pm-panel{display:none}
+      .pm-count{font-size:.78rem;color:var(--ink-muted);margin:.9rem 0 0}
+      #pm1:checked ~ .pm-field .pm-tabs label[for=pm1]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm1:checked ~ .pm-panels #pmp1{display:block}
+      #pm2:checked ~ .pm-field .pm-tabs label[for=pm2]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm2:checked ~ .pm-panels #pmp2{display:block}
+      #pm3:checked ~ .pm-field .pm-tabs label[for=pm3]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm3:checked ~ .pm-panels #pmp3{display:block}
+      #pm4:checked ~ .pm-field .pm-tabs label[for=pm4]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm4:checked ~ .pm-panels #pmp4{display:block}
+      #pm5:checked ~ .pm-field .pm-tabs label[for=pm5]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm5:checked ~ .pm-panels #pmp5{display:block}
+      #pm6:checked ~ .pm-field .pm-tabs label[for=pm6]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm6:checked ~ .pm-panels #pmp6{display:block}
+      #pm7:checked ~ .pm-field .pm-tabs label[for=pm7]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+      #pm7:checked ~ .pm-panels #pmp7{display:block}
+    </style>
+      <div class="brief"><p class="brief__eyebrow">Emails &middot; kontakt forma</p><h1>Kontakt forma</h1><p class="brief__lede">Kontakt forma na izobilje.com nudi sedam predmeta. Svaki predmet dobija svoj automatski odgovor. Promeni predmet ispod da vidiš odgovor koji ga prati.</p><div class="brief__body"><p>Predmeti su preuzeti direktno iz forme na sajtu i postoje na svih pet jezika. Odgovori su nacrti za odobrenje, nijedan još nije poslat.</p></div><div class="pm"><input type="radio" name="pm" id="pm1" checked><input type="radio" name="pm" id="pm2"><input type="radio" name="pm" id="pm3"><input type="radio" name="pm" id="pm4"><input type="radio" name="pm" id="pm5"><input type="radio" name="pm" id="pm6"><input type="radio" name="pm" id="pm7"><div class="pm-field"><div class="pm-label">Predmet</div><div class="pm-tabs"><label for="pm1">Šumski Mir partnerstvo</label><label for="pm2">Donacija i podrška</label><label for="pm3">Upit o događaju</label><label for="pm4">Upit o kampu</label><label for="pm5">Aktivnosti vezane za ranč</label><label for="pm6">Narudžbina meda</label><label for="pm7">Ostalo</label></div></div><div class="pm-panels"><div class="pm-panel" id="pmp1"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Šumski Mir partnerstvo</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti na interesovanju za saradnju sa Šumskim Mirom! 🌲</p><p style="margin:0 0 .85rem">Obnovu Deliblatske peščare ne možemo izvesti sami. Sarađujemo sa institucijama, firmama i organizacijama koje žele da podrže pošumljavanje, održivu poljoprivredu i rad sa zajednicom.</p><p style="margin:0 0 .85rem">Da bismo ti odgovorili konkretno, javi nam u nekoliko rečenica: čime se baviš, šta imaš na umu i u kom vremenskom okviru. Ako imate CSR program ili godišnji budžet za podršku, napomeni i to.</p><p style="margin:0 0 .85rem">Javićemo se u roku od nekoliko radnih dana sa predlogom kako bi saradnja mogla da izgleda.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 1 od 7</p></div><div class="pm-panel" id="pmp2"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Donacija i podrška</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti puno na želji da podržiš obnovu Deliblatske peščare! 💚</p><p style="margin:0 0 .85rem">Naš rad je zasnovan na donacijama. Sredstva idu u sadnice, rasadnik iz kog uzgajamo buduće šume i organizaciju zajedničkih akcija sadnje.</p><p style="margin:0 0 .85rem">Javićemo ti se sa detaljima o načinima donacije i o tome šta konkretno tvoja podrška pokriva.</p><p style="margin:0 0 .85rem">Ako želiš da pomogneš i bez donacije, mnogo nam znači ako podeliš informacije o akciji sa prijateljima, kolegama i lokalnim biznisima. Rado ti šaljemo plakat koji možeš odštampati i postaviti na vidno mesto.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 2 od 7</p></div><div class="pm-panel" id="pmp3"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Upit o događaju</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti na upitu o našim događajima! 🌱</p><p style="margin:0 0 .85rem">Kroz godinu organizujemo sadnju drveća, radionice, joga sesije i sezonska okupljanja zajednice. Termini zavise od godišnjeg doba i vremenskih uslova, pa ih objavljujemo kada su potvrđeni.</p><p style="margin:0 0 .85rem">Javi nam koji te tip događaja zanima i da li dolaziš sam ili sa grupom, pa ćemo ti poslati prve slobodne termine.</p><p style="margin:0 0 .85rem">Za sve najave i nove akcije prati nas na Instagramu, gde redovno objavljujemo šta se sprema.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 3 od 7</p></div><div class="pm-panel" id="pmp4"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Upit o kampu</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti na upitu o kampu! ⛺</p><p style="margin:0 0 .85rem">Šumski Mir Co-Working Camp nudi izolovana mesta među drvećem, zajedničku opremljenu kuhinju, ognjište za večernja okupljanja, pouzdan internet u celom kampu i siguran parking. Prilaz je asfaltiran, pa je kamp dostupan i za kampere, RV vozila i bicikle.</p><p style="margin:0 0 .85rem">Kod nas plaćaš koliko želiš i koliko možeš. Radije bismo da dođeš nego da te cena zadrži.</p><p style="margin:0 0 .85rem">Javi nam željene datume, broj ljudi i da li dolaziš vozilom ili šatorom, pa ćemo ti potvrditi da li imamo mesta.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 4 od 7</p></div><div class="pm-panel" id="pmp5"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Aktivnosti vezane za ranč</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti na interesovanju za ranč! 🚜</p><p style="margin:0 0 .85rem">Na ranču se bavimo zajedničkim baštovanstvom, pošumljavanjem i primenom savremene tehnologije u poljoprivredi, uključujući dronove i senzore. Deo posla radimo zajedno sa volonterima i partnerima.</p><p style="margin:0 0 .85rem">Javi nam da li te zanima volontiranje, poseta, saradnja ili nešto konkretno iz našeg rada, i koliko vremena imaš na raspolaganju.</p><p style="margin:0 0 .85rem">Javićemo ti se sa terminima i sa onim što nam je trenutno najpotrebnije.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 5 od 7</p></div><div class="pm-panel" id="pmp6"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Narudžbina meda</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti na interesovanju za naš med! 🍯</p><p style="margin:0 0 .85rem">Naš med je čist, sirov i nefiltriran, sakupljen iz pčelinjaka u šumi oko Šumskog Mira. Količine su ograničene i zavise od sezone.</p><p style="margin:0 0 .85rem">Javi nam koliko tegli želiš i gde se nalaziš, pa ćemo ti potvrditi dostupnost, cenu i način preuzimanja ili slanja.</p><p style="margin:0 0 .85rem">Ako si u prilici da svratiš, najlepše je preuzeti med kod nas i videti odakle dolazi.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 6 od 7</p></div><div class="pm-panel" id="pmp7"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Ostalo</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti što si nam pisao! 🌲</p><p style="margin:0 0 .85rem">Primili smo tvoju poruku i javićemo ti se u roku od nekoliko radnih dana.</p><p style="margin:0 0 .85rem">Ako je u pitanju nešto hitno, možeš nas dobiti i telefonom.</p><p style="margin:0 0 .85rem">U međuvremenu, sve najave, akcije i novosti objavljujemo na Instagramu.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 7 od 7</p></div></div></div><div class="brief__foot"><span class="brief__num">7</span><span>Sedam odgovora, jedna forma. Nijedan još nije poslat.</span></div></div>`,
 };
 
 function pickLang() {
