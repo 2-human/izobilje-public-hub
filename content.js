@@ -947,3 +947,26 @@ if (typeof document !== "undefined" && typeof document.addEventListener === "fun
     el.parentNode.insertBefore(wrap, el.nextSibling);
   });
 }
+
+/* ---------------------------------------------------------------------------
+ * Review widget (feature review-widget, feature_version 1.3.0)
+ * ---------------------------------------------------------------------------
+ * Loaded from here rather than by adding <script> tags to index.html, because index.html is
+ * the pinned chassis and every line added to it is a divergence to re-apply on the next
+ * chassis upgrade. content.js is ours by contract, so the widget rides along with the config
+ * it needs. This is a deliberate difference from the midrata/credo compositions, which add
+ * two script tags to their chassis copy.
+ *
+ * `async = false` preserves execution order: the config global must exist before the
+ * bootstrap reads it. The bootstrap is inert without `?review=1` — it only paints a floating
+ * "Comments" button until review mode is entered.
+ * ------------------------------------------------------------------------- */
+if (typeof document !== "undefined" && document.createElement) {
+  ["review.config.js", "review-bootstrap.js"].forEach(function (src) {
+    var el = document.createElement("script");
+    el.src = src;
+    el.async = false;
+    el.setAttribute("data-review-skip", "");
+    document.head.appendChild(el);
+  });
+}
