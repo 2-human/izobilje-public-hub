@@ -64,7 +64,7 @@ window.HUB = {
         icon: "<svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6'><circle cx='12' cy='12' r='9'/><path d='M12 8h.01M11 12h1v4h1'/></svg>" },
     ]},
     { section: "The Community", items: [
-      { view: "who", label: "Who we are", badge: 9,
+      { view: "who", label: "Who we are", badge: 5,
         icon: "<svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6'><path d='M3 20v-1a4 4 0 014-4h4a4 4 0 014 4v1'/><circle cx='9' cy='8' r='3'/><path d='M16 3.5a3 3 0 010 5.8M21 20v-1a4 4 0 00-3-3.8'/></svg>" },
       { view: "audiences", label: "Who it's for",
         icon: "<svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6'><circle cx='12' cy='12' r='3'/><circle cx='12' cy='12' r='8'/></svg>" },
@@ -139,8 +139,8 @@ window.HUB = {
         <div class="brief__aside">Today the hub holds one artefact: the website. Everything else
         in this view describes the shape the architecture is taking, not work already done.</div>
         <h2>How to read it</h2>
-        <p><b>Who we are</b> is the brand architecture: Izobilje and the nine named brands
-        currently living under it. <b>Who it's for</b> sets out the audiences in tiers, because
+        <p><b>Who we are</b> is the brand architecture: the five brands under Izobilje, one of
+        which (Šumski Mir) is itself a parent with four offers. <b>Who it's for</b> sets out the audiences in tiers, because
         the tiering decides what gets built first. <b>izobilje.com</b> is the first artefact, and
         <b>Decisions</b> records what has been settled and what is still open.</p>
       </div>
@@ -157,64 +157,68 @@ window.HUB = {
       Serbia, practising environmental regeneration, circular and sustainable growth, communal
       living, and participatory decision making. People live on the land now.</p>
       <div class="brief__body">
-        <p>The name that appears most in public is not always Izobilje. Most of the activity is
-        carried by named sub-brands, several of which share the <b>Šumski Mir</b> prefix. Getting
-        that hierarchy explicit is the first job of this hub, because it decides what each future
-        asset is called and where it belongs.</p>
-        <div class="brief__aside">Nine named brands are in use today. Only one of them, the
-        website, currently has an artefact in this hub.</div>
+        <p>The name that appears most in public is not always Izobilje. Nine named things are in
+        use today, and they are not siblings: four of them are offers that live inside
+        <b>Šumski Mir</b> and carry its name. Grouping them that way leaves <b>five brands</b>
+        directly under the umbrella.</p>
+        <p>Getting that hierarchy explicit is the first job of this hub, because it decides what
+        each future asset is called, which brand it belongs to, and where its files live.</p>
+        <div class="brief__aside">Five brands under Izobilje. One of them, Šumski Mir, is itself a
+        parent with four offers under it. Only the website currently has an artefact in this
+        hub.</div>
       </div>
 
       <div class="brief__sec"><span class="brief__num">01</span><div>
         <h2>Šumski Mir</h2>
         <p>The outdoor centre in the heart of Deliblatska peščara, and the flagship under the
-        umbrella. Most other brands sit beneath it rather than beside it.</p></div></div>
+        umbrella. It is the only sub-brand that is itself a parent: four of the community's offers
+        run under its name rather than beside it, which is why they are nested here instead of
+        listed as separate brands.</p>
+        <div class="svc">
+          <div class="svc__row"><div class="svc__name">Co-Working Camp</div>
+            <div class="svc__desc">Camping aimed at digital nomads and remote workers, positioned
+            on reliable wifi, forest workspaces and pay-what-you-feel pricing.
+            <span class="svc__tags">Šumski Mir Co-Working Camp</span></div></div>
+          <div class="svc__row"><div class="svc__name">Overland &amp; RV Campsite</div>
+            <div class="svc__desc">Vehicle-based camping, described on the site as a first of its
+            kind in Serbia for overland travellers.
+            <span class="svc__tags">Šumski Mir Overland &amp; RV Campsite</span></div></div>
+          <div class="svc__row"><div class="svc__name">Ranč</div>
+            <div class="svc__desc">The agricultural side: shared gardening, afforestation, and
+            drone, AI and IoT technology applied to modern farming.
+            <span class="svc__tags">Šumski Mir Ranč</span></div></div>
+          <div class="svc__row"><div class="svc__name">Med</div>
+            <div class="svc__desc">Honey from the forest apiaries, sold raw and unfiltered. The
+            clearest product brand in the set, and the one most obviously able to carry commerce.
+            <span class="svc__tags">Šumski Mir med</span></div></div>
+        </div></div></div>
 
       <div class="brief__sec"><span class="brief__num">02</span><div>
-        <h2>Šumski Mir Co-Working Camp</h2>
-        <p>The camping offer, aimed at digital nomads and remote workers. Positioned around
-        reliable wifi, forest workspaces and pay-what-you-feel pricing.</p></div></div>
-
-      <div class="brief__sec"><span class="brief__num">03</span><div>
-        <h2>Šumski Mir Overland &amp; RV Campsite</h2>
-        <p>Vehicle-based camping, described on the site as a first of its kind in Serbia for
-        overland travellers.</p></div></div>
-
-      <div class="brief__sec"><span class="brief__num">04</span><div>
-        <h2>Šumski Mir Ranč</h2>
-        <p>The agricultural side: shared gardening, afforestation, and drone, AI and IoT
-        technology applied to modern farming.</p></div></div>
-
-      <div class="brief__sec"><span class="brief__num">05</span><div>
-        <h2>Šumski Mir med</h2>
-        <p>Honey from the forest apiaries, sold raw and unfiltered. The clearest product brand in
-        the set, and the one most obviously able to carry commerce.</p></div></div>
-
-      <div class="brief__sec"><span class="brief__num">06</span><div>
         <h2>Wrangleritza</h2>
         <p>Guided Jeep safari and off-road tours. The only brand in the set whose name does not
         signal its parent, which may be deliberate and is worth a decision either way.</p></div></div>
 
-      <div class="brief__sec"><span class="brief__num">07</span><div>
+      <div class="brief__sec"><span class="brief__num">03</span><div>
         <h2>Udruženje Novo Jutro</h2>
         <p>The association: the governance, membership and ethics vehicle. Structurally different
         from the others, since it is a legal body rather than an offer.</p></div></div>
 
-      <div class="brief__sec"><span class="brief__num">08</span><div>
+      <div class="brief__sec"><span class="brief__num">04</span><div>
         <h2>Silva Banatica</h2>
         <p>The forest and biodiversity restoration initiative for the Banat. Live in the site's
         router but deliberately absent from its sitemap, because the page is still a placeholder.
         It reads as the most fundable thing here.</p></div></div>
 
-      <div class="brief__sec"><span class="brief__num">09</span><div>
+      <div class="brief__sec"><span class="brief__num">05</span><div>
         <h2>Rasadnik</h2>
         <p>The nursery, growing and tending seedlings to share with the community and to push
         further planting across Serbia. Currently a section of the site rather than a brand with
-        its own surface.</p></div></div>
+        its own surface, and arguably an offer under Šumski Mir rather than a brand beside
+        it.</p></div></div>
 
       <div class="brief__foot"><span class="brief__num">?</span>
-        <span>Open question: which of these are brands, which are products, and which are just
-        page headings. Recorded in Decisions.</span></div>
+        <span>Open question: whether Rasadnik belongs inside Šumski Mir, and whether Wrangleritza
+        should carry the parent name. Recorded in Decisions.</span></div>
     </div>`,
 
     /* -------------------------------------------------------------- audiences */
