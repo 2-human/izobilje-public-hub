@@ -40,6 +40,502 @@ var LANGS = [
 var DEFAULT_LANG = "en";
 var LANG_KEY = "izobiljeHubLang";
 
+var EMAILS = {
+  "contact": {
+    "form": {
+      "sr": "Kontakt forma",
+      "en": "Contact form"
+    },
+    "formKey": "contactPage",
+    "url": "contact/",
+    "selector": {
+      "sr": "Predmet",
+      "en": "Predmet (subject)"
+    },
+    "fields": {
+      "sr": "Ime, Email, Telefon, Predmet, poruka",
+      "en": "Ime, Email, Telefon, Predmet, message"
+    },
+    "sender": "Jovan · Šumski Mir",
+    "canon": "content/email/contact-form-autoresponses/EMAIL.md",
+    "variants": [
+      {
+        "id": "v01",
+        "label": {
+          "sr": "Šumski Mir partnerstvo",
+          "en": "Šumski Mir partnership"
+        },
+        "formValue": "Šumski Mir partnership",
+        "note": {
+          "sr": "An organisation, business or institution proposing to work together.",
+          "en": "An organisation, business or institution proposing to work together."
+        },
+        "sequence": [
+          {
+            "step": 1,
+            "status": "draft",
+            "when": {
+              "sr": "Odmah po slanju forme",
+              "en": "Immediately on submission"
+            },
+            "subject": null,
+            "body": {
+              "sr": [
+                "Hvala ti na interesovanju za saradnju sa Šumskim Mirom! 🌲",
+                "Obnovu Deliblatske peščare ne možemo izvesti sami. Sarađujemo sa institucijama, firmama i organizacijama koje žele da podrže pošumljavanje, održivu poljoprivredu i rad sa zajednicom.",
+                "Da bismo ti odgovorili konkretno, javi nam u nekoliko rečenica: čime se baviš, šta imaš na umu i u kom vremenskom okviru. Ako imate CSR program ili godišnji budžet za podršku, napomeni i to.",
+                "Javićemo se u roku od nekoliko radnih dana sa predlogom kako bi saradnja mogla da izgleda."
+              ],
+              "en": [
+                "Thank you for your interest in working with Šumski Mir. 🌲",
+                "We cannot restore Deliblatska peščara on our own. We work with institutions, businesses and organisations that want to support afforestation, sustainable agriculture and community work.",
+                "So we can answer you concretely, tell us in a few sentences what you do, what you have in mind, and over what timeframe. If you have a CSR programme or an annual support budget, mention that too.",
+                "We will come back to you within a few working days with a proposal for what the collaboration could look like."
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "v02",
+        "label": {
+          "sr": "Donacija i podrška",
+          "en": "Donation & Support"
+        },
+        "formValue": "Donation & Support",
+        "note": {
+          "sr": "Someone offering money, materials or other support.",
+          "en": "Someone offering money, materials or other support."
+        },
+        "sequence": [
+          {
+            "step": 1,
+            "status": "draft",
+            "when": {
+              "sr": "Odmah po slanju forme",
+              "en": "Immediately on submission"
+            },
+            "subject": null,
+            "body": {
+              "sr": [
+                "Hvala ti puno na želji da podržiš obnovu Deliblatske peščare! 💚",
+                "Naš rad je zasnovan na donacijama. Sredstva idu u sadnice, rasadnik iz kog uzgajamo buduće šume i organizaciju zajedničkih akcija sadnje.",
+                "Javićemo ti se sa detaljima o načinima donacije i o tome šta konkretno tvoja podrška pokriva.",
+                "Ako želiš da pomogneš i bez donacije, mnogo nam znači ako podeliš informacije o akciji sa prijateljima, kolegama i lokalnim biznisima. Rado ti šaljemo plakat koji možeš odštampati i postaviti na vidno mesto."
+              ],
+              "en": [
+                "Thank you for wanting to support the restoration of Deliblatska peščara. 💚",
+                "Our work runs on donations. Funds go into seedlings, the nursery where we grow future forests, and the organisation of shared planting days.",
+                "We will come back to you with the ways to donate and with what your support covers specifically.",
+                "If you would like to help without donating, it means a great deal if you share the action with friends, colleagues and local businesses. We are glad to send you a poster you can print and put up somewhere visible."
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "v03",
+        "label": {
+          "sr": "Upit o događaju",
+          "en": "Event inquiry"
+        },
+        "formValue": "Event inquiry",
+        "note": {
+          "sr": "Someone asking about gatherings, workshops or planting days.",
+          "en": "Someone asking about gatherings, workshops or planting days."
+        },
+        "sequence": [
+          {
+            "step": 1,
+            "status": "draft",
+            "when": {
+              "sr": "Odmah po slanju forme",
+              "en": "Immediately on submission"
+            },
+            "subject": null,
+            "body": {
+              "sr": [
+                "Hvala ti na upitu o našim događajima! 🌱",
+                "Kroz godinu organizujemo sadnju drveća, radionice, joga sesije i sezonska okupljanja zajednice. Termini zavise od godišnjeg doba i vremenskih uslova, pa ih objavljujemo kada su potvrđeni.",
+                "Javi nam koji te tip događaja zanima i da li dolaziš sam ili sa grupom, pa ćemo ti poslati prve slobodne termine.",
+                "Za sve najave i nove akcije prati nas na Instagramu, gde redovno objavljujemo šta se sprema."
+              ],
+              "en": [
+                "Thank you for asking about our events. 🌱",
+                "Through the year we run tree planting, workshops, yoga sessions and seasonal community gatherings. Dates depend on the season and the weather, so we publish them once they are confirmed.",
+                "Tell us which kind of event interests you and whether you are coming alone or with a group, and we will send you the next available dates.",
+                "For announcements and new actions, follow us on Instagram, where we post what is coming up."
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "v04",
+        "label": {
+          "sr": "Upit o kampu",
+          "en": "Camping Inquiry"
+        },
+        "formValue": "Camping Inquiry",
+        "note": {
+          "sr": "Someone asking about staying at the camp, including overland and RV.",
+          "en": "Someone asking about staying at the camp, including overland and RV."
+        },
+        "sequence": [
+          {
+            "step": 1,
+            "status": "draft",
+            "when": {
+              "sr": "Odmah po slanju forme",
+              "en": "Immediately on submission"
+            },
+            "subject": null,
+            "body": {
+              "sr": [
+                "Hvala ti na upitu o kampu! ⛺",
+                "Šumski Mir Co-Working Camp nudi izolovana mesta među drvećem, zajedničku opremljenu kuhinju, ognjište za večernja okupljanja, pouzdan internet u celom kampu i siguran parking. Prilaz je asfaltiran, pa je kamp dostupan i za kampere, RV vozila i bicikle.",
+                "Kod nas plaćaš koliko želiš i koliko možeš. Radije bismo da dođeš nego da te cena zadrži.",
+                "Javi nam željene datume, broj ljudi i da li dolaziš vozilom ili šatorom, pa ćemo ti potvrditi da li imamo mesta."
+              ],
+              "en": [
+                "Thank you for asking about the camp. ⛺",
+                "Šumski Mir Co-Working Camp has secluded pitches among the trees, a shared equipped kitchen, a firepit for evening gatherings, reliable internet across the camp and secure parking. The approach is paved, so the camp is reachable by campervan, RV and bicycle.",
+                "You pay what you feel and what you can. We would rather you came than let the price keep you away.",
+                "Send us your preferred dates, how many people, and whether you are arriving by vehicle or with a tent, and we will confirm availability."
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "v05",
+        "label": {
+          "sr": "Aktivnosti vezane za ranč",
+          "en": "Ranch related activities"
+        },
+        "formValue": "Ranch related activities",
+        "note": {
+          "sr": "Someone asking about the farm, volunteering or the technology work.",
+          "en": "Someone asking about the farm, volunteering or the technology work."
+        },
+        "sequence": [
+          {
+            "step": 1,
+            "status": "draft",
+            "when": {
+              "sr": "Odmah po slanju forme",
+              "en": "Immediately on submission"
+            },
+            "subject": null,
+            "body": {
+              "sr": [
+                "Hvala ti na interesovanju za ranč! 🚜",
+                "Na ranču se bavimo zajedničkim baštovanstvom, pošumljavanjem i primenom savremene tehnologije u poljoprivredi, uključujući dronove i senzore. Deo posla radimo zajedno sa volonterima i partnerima.",
+                "Javi nam da li te zanima volontiranje, poseta, saradnja ili nešto konkretno iz našeg rada, i koliko vremena imaš na raspolaganju.",
+                "Javićemo ti se sa terminima i sa onim što nam je trenutno najpotrebnije."
+              ],
+              "en": [
+                "Thank you for your interest in the ranch. 🚜",
+                "At the ranch we work on shared gardening, afforestation and the use of modern technology in farming, including drones and sensors. Part of that work is done alongside volunteers and partners.",
+                "Tell us whether you are interested in volunteering, a visit, a collaboration or something specific from our work, and how much time you have.",
+                "We will come back with dates and with what we most need help on right now."
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "v06",
+        "label": {
+          "sr": "Narudžbina meda",
+          "en": "Honey order"
+        },
+        "formValue": "Honey order",
+        "note": {
+          "sr": "Someone ordering honey.",
+          "en": "Someone ordering honey."
+        },
+        "sequence": [
+          {
+            "step": 1,
+            "status": "draft",
+            "when": {
+              "sr": "Odmah po slanju forme",
+              "en": "Immediately on submission"
+            },
+            "subject": null,
+            "body": {
+              "sr": [
+                "Hvala ti na interesovanju za naš med! 🍯",
+                "Naš med je čist, sirov i nefiltriran, sakupljen iz pčelinjaka u šumi oko Šumskog Mira. Količine su ograničene i zavise od sezone.",
+                "Javi nam koliko tegli želiš i gde se nalaziš, pa ćemo ti potvrditi dostupnost, cenu i način preuzimanja ili slanja.",
+                "Ako si u prilici da svratiš, najlepše je preuzeti med kod nas i videti odakle dolazi."
+              ],
+              "en": [
+                "Thank you for your interest in our honey. 🍯",
+                "Our honey is pure, raw and unfiltered, collected from the apiaries in the forest around Šumski Mir. Quantities are limited and depend on the season.",
+                "Tell us how many jars you would like and where you are, and we will confirm availability, price and whether you collect or we ship.",
+                "If you are able to visit, the nicest way is to collect it here and see where it comes from."
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "v07",
+        "label": {
+          "sr": "Ostalo",
+          "en": "Other"
+        },
+        "formValue": "Other",
+        "note": {
+          "sr": "Anything that does not fit the six subjects above.",
+          "en": "Anything that does not fit the six subjects above."
+        },
+        "sequence": [
+          {
+            "step": 1,
+            "status": "draft",
+            "when": {
+              "sr": "Odmah po slanju forme",
+              "en": "Immediately on submission"
+            },
+            "subject": null,
+            "body": {
+              "sr": [
+                "Hvala ti što si nam pisao! 🌲",
+                "Primili smo tvoju poruku i javićemo ti se u roku od nekoliko radnih dana.",
+                "Ako je u pitanju nešto hitno, možeš nas dobiti i telefonom.",
+                "U međuvremenu, sve najave, akcije i novosti objavljujemo na Instagramu."
+              ],
+              "en": [
+                "Thank you for writing to us. 🌲",
+                "We have received your message and will come back to you within a few working days.",
+                "If it is urgent, you can also reach us by phone.",
+                "In the meantime, we post all announcements, actions and news on Instagram."
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "planting": {
+    "form": {
+      "sr": "Prijava za sadnju",
+      "en": "Reforestation signup"
+    },
+    "formKey": "plantingSignup",
+    "url": "events/",
+    "selector": {
+      "sr": "Prijava",
+      "en": "Signup"
+    },
+    "fields": {
+      "sr": "Ime, Email, Telefon, Broj učesnika, Željeni termini, Napomena",
+      "en": "Ime, Email, Telefon, Broj učesnika, Željeni termini, Napomena"
+    },
+    "sender": "Jovan · Šumski Mir",
+    "canon": "content/email/planting-signup-autoresponse/EMAIL.md",
+    "variants": [
+      {
+        "id": "signup",
+        "label": {
+          "sr": "Prijava za sadnju",
+          "en": "Reforestation signup"
+        },
+        "formValue": "plantingSignup",
+        "note": {
+          "sr": "Prijava za akciju obnove Deliblatske peščare.",
+          "en": "Registration for the Deliblatska peščara restoration action."
+        },
+        "sequence": [
+          {
+            "step": 1,
+            "status": "sent",
+            "when": {
+              "sr": "Odmah po prijavi",
+              "en": "Immediately on registration"
+            },
+            "subject": null,
+            "body": {
+              "sr": [
+                "Hvala ti puno na prijavi i želji da se uključiš u akciju obnove Deliblatske peščare! 🌱🌲",
+                "Akcija je planirana za kraj oktobra, a čim utvrdimo tačan datum i detalje, obavestićemo sve prijavljene blagovremeno.",
+                "Krajem septembra poslaćemo dodatni email sa informacijama o akciji, organizaciji dolaska, potrebnoj opremi i aktivnostima.",
+                "Do tada, svaki vid podrške nam mnogo znači. Posebno nam pomaže ako podeliš informacije o akciji na svojim društvenim mrežama i pozoveš prijatelje i kolege da se uključe. Veća vidljivost znači i više ljudi koji mogu doprineti obnovi Deliblatske peščare. 💚",
+                "Za naredne objave, volonterske akcije i obaveštenja:",
+                "🌲 WhatsApp komuna · 📅 Događaji · 📲 Instagram",
+                "Tu ćemo redovno objavljivati nove informacije i lakše koordinisati zajednicu kako projekat bude napredovao.",
+                "U prilogu ti šaljemo i plakat za prikupljanje donacija za obnovu šume. Slobodno ga odštampaj i podeli sa lokalima i biznisima koji su voljni da podrže akciju obnove. Najbolje ga je postaviti na vidno mesto u objektu gde je najveća cirkulacija ljudi.",
+                "Hvala ti što želiš da budeš deo ove priče. Vidimo se u šumi! 🌲"
+              ]
+            }
+          },
+          {
+            "step": 2,
+            "status": "planned",
+            "when": {
+              "sr": "Kraj septembra",
+              "en": "End of September"
+            },
+            "subject": null,
+            "body": {},
+            "brief": {
+              "sr": "Obećan u prvom mejlu: detalji akcije, organizacija dolaska, potrebna oprema i aktivnosti. Još nije napisan.",
+              "en": "Promised in email 1: the action's details, arrival logistics, required equipment and activities. Not written yet."
+            }
+          },
+          {
+            "step": 3,
+            "status": "planned",
+            "when": {
+              "sr": "Kad se potvrdi datum",
+              "en": "When the date is confirmed"
+            },
+            "subject": null,
+            "body": {},
+            "brief": {
+              "sr": "Obećana najava tačnog datuma krajem oktobra. Još nije napisana.",
+              "en": "The promised announcement of the confirmed late-October date. Not written yet."
+            }
+          }
+        ]
+      }
+    ]
+  }
+};
+
+var EMAIL_UI = {
+  "sr": {
+    "triggeredBy": "Pokreće",
+    "fields": "Polja forme",
+    "sender": "Pošiljalac",
+    "sequence": "Sekvenca",
+    "canon": "Kanonski izvor",
+    "step": "Mejl",
+    "of": "od",
+    "subject": "Naslov",
+    "noSubject": "nije definisan",
+    "when": "Kada",
+    "sent": "POSLATO",
+    "draft": "NACRT",
+    "planned": "PLANIRANO",
+    "asSent": "Prikazano onako kako je poslato, na srpskom.",
+    "notWritten": "Nije napisan"
+  },
+  "en": {
+    "triggeredBy": "Triggered by",
+    "fields": "Form fields",
+    "sender": "Sender",
+    "sequence": "Sequence",
+    "canon": "Canonical source",
+    "step": "Email",
+    "of": "of",
+    "subject": "Subject",
+    "noSubject": "not defined",
+    "when": "When",
+    "sent": "SENT",
+    "draft": "DRAFT",
+    "planned": "PLANNED",
+    "asSent": "Shown as sent, in Serbian.",
+    "notWritten": "Not written yet"
+  }
+};
+
+var SIGNOFF = {"sr": "Srdačan pozdrav,", "en": "Warm regards,"};
+
+/* ---------------------------------------------------------------------------
+ * Email artefact renderer
+ * ---------------------------------------------------------------------------
+ * One template for every email artefact, driven by the EMAILS data above. A form is a
+ * page; each of its variants is a tab; each variant holds a SEQUENCE of sends. Adding a
+ * follow-up is appending one object to `sequence` — no markup, no new view, no chassis
+ * change. Adding a whole new form is one key in EMAILS plus a nav item.
+ *
+ * Tabs are CSS-only (radio + `:checked ~` sibling selectors, scoped <style>), so nothing
+ * here depends on script running after the chassis injects the HTML.
+ * ------------------------------------------------------------------------- */
+function emailEsc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+
+function renderEmail(formKey, lang) {
+  var F = EMAILS[formKey], T = EMAIL_UI[lang] || EMAIL_UI.en;
+  var vs = F.variants, pre = formKey + "-";
+  var style = ['<style>',
+    '.em-label{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);margin:1.4rem 0 .6rem}',
+    '.em input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}',
+    '.em-tabs{display:flex;flex-wrap:wrap;gap:.4rem}',
+    '.em-tabs label{border:1px solid var(--hairline);background:#fff;border-radius:999px;padding:.45rem .95rem;font-size:.85rem;font-weight:600;color:var(--ink);cursor:pointer}',
+    '.em-tabs label:hover{border-color:var(--accent)}',
+    '.em-panel{display:none}',
+    '.em-step{margin-top:1.5rem}',
+    '.em-step__top{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;flex-wrap:wrap}',
+    '.em-chip{font-size:.66rem;font-weight:700;letter-spacing:.1em;padding:.2rem .5rem;border-radius:.3rem}',
+    '.em-chip--sent{background:#e7f6ec;color:#1a7f45}',
+    '.em-chip--draft{background:var(--accent-soft);color:var(--accent-strong)}',
+    '.em-chip--planned{background:#f1efe9;color:#8a7f66}',
+    '.em-step__n{font-family:var(--font-display);font-size:1.05rem;color:var(--ink)}',
+    '.em-when{font-size:.8rem;color:var(--ink-muted)}',
+    '.em-empty{border:1px dashed var(--hairline);border-radius:12px;padding:1.2rem 1.4rem;color:var(--ink-muted);font-size:.92rem}',
+    '.em-note{font-size:.8rem;color:var(--ink-muted);margin:.5rem 0 0}'].join("");
+  for (var i = 0; i < vs.length; i++) {
+    style += '#' + pre + (i + 1) + ':checked ~ .em-field .em-tabs label[for=' + pre + (i + 1) + ']{background:var(--accent);border-color:var(--accent);color:var(--bg)}';
+    style += '#' + pre + (i + 1) + ':checked ~ .em-panels #' + pre + 'p' + (i + 1) + '{display:block}';
+  }
+  style += '</style>';
+
+  var meta = '<div class="state">' +
+    row(T.triggeredBy, '<b>' + emailEsc(F.formKey) + '</b> &middot; /' + emailEsc(F.url)) +
+    row(T.fields, emailEsc(F.fields[lang] || F.fields.en)) +
+    row(T.sender, emailEsc(F.sender)) +
+    row(T.canon, '<span class="mono">' + emailEsc(F.canon) + '</span>') +
+    '</div>';
+  function row(k, v) {
+    return '<div class="state__row"><div class="state__k">' + emailEsc(k) + '</div><div class="state__v">' + v + '</div></div>';
+  }
+
+  var inputs = "", tabs = "", panels = "";
+  for (var v = 0; v < vs.length; v++) {
+    var V = vs[v], id = pre + (v + 1);
+    inputs += '<input type="radio" name="' + pre + 'tab" id="' + id + '"' + (v === 0 ? " checked" : "") + '>';
+    tabs += '<label for="' + id + '">' + emailEsc(V.label[lang] || V.label.en) + '</label>';
+
+    var steps = "";
+    for (var s = 0; s < V.sequence.length; s++) {
+      var S = V.sequence[s];
+      var chip = '<span class="em-chip em-chip--' + S.status + '">' + emailEsc(T[S.status]) + '</span>';
+      var when = '<span class="em-when">' + emailEsc(S.when[lang] || S.when.en) + '</span>';
+      var head = '<div class="em-step__top"><span class="em-step__n">' + emailEsc(T.step) + " " +
+        S.step + " " + emailEsc(T.of) + " " + V.sequence.length + '</span>' + chip + when + '</div>';
+      var body = S.body && (S.body[lang] || S.body.sr || S.body.en);
+      var inner;
+      if (body) {
+        var ps = "";
+        for (var b = 0; b < body.length; b++) ps += '<p style="margin:0 0 .85rem">' + emailEsc(body[b]) + '</p>';
+        ps += '<p style="margin:0">' + emailEsc(SIGNOFF[lang] || SIGNOFF.en) + '<br>Jovan<br>Šumski Mir</p>';
+        inner = '<div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6">' + ps + '</div>';
+        if (!S.body[lang] && S.body.sr) inner += '<p class="em-note">' + emailEsc(T.asSent) + '</p>';
+      } else {
+        inner = '<div class="em-empty"><b>' + emailEsc(T.notWritten) + '.</b> ' +
+          emailEsc((S.brief && (S.brief[lang] || S.brief.en)) || "") + '</div>';
+      }
+      var subj = '<p class="em-note">' + emailEsc(T.subject) + ": " +
+        (S.subject ? emailEsc(S.subject) : "<i>" + emailEsc(T.noSubject) + "</i>") + '</p>';
+      steps += '<div class="em-step">' + head + inner + subj + '</div>';
+    }
+
+    panels += '<div class="em-panel" id="' + pre + 'p' + (v + 1) + '">' +
+      '<p class="svc__tags" style="margin:0 0 .4rem">' + emailEsc(V.formValue) + '</p>' +
+      '<p style="margin:0 0 .2rem">' + emailEsc(V.note[lang] || V.note.en) + '</p>' +
+      steps + '</div>';
+  }
+
+  return style + '<div class="brief">' + meta + '<div class="em">' + inputs +
+    '<div class="em-field"><div class="em-label">' + emailEsc(F.selector[lang] || F.selector.en) +
+    '</div><div class="em-tabs">' + tabs + '</div></div>' +
+    '<div class="em-panels">' + panels + '</div></div></div>';
+}
+
 var I18N = {};
 
 I18N.en = {
@@ -185,124 +681,8 @@ I18N.en = {
     website: `<iframe title="izobilje.com" src="${WEB}"></iframe>`,
 
     /* --------------------------------------------------------------- planting */
-    planting: `
-    <div class="brief">
-      <p class="brief__eyebrow">Emails &middot; autoresponse</p>
-      <h1>Reforestation signup</h1>
-      <p class="brief__lede">An email only means something next to the thing that triggers it. This
-      view pairs the autoresponse with the registration form that sends it, so the two are read and
-      changed together rather than drifting apart.</p>
-      <div class="brief__body">
-        <p>The email is live: people who register for the Deliblatska peščara reforestation action
-        receive it today. Its canonical text lives in the private repo at
-        <span class="mono">content/email/planting-signup-autoresponse/EMAIL.md</span>.</p>
-      </div>
-
-      <div class="state">
-        <div class="state__row"><div class="state__k">Triggered by</div>
-          <div class="state__v"><b>plantingSignup</b>, the registration form on the
-          <b>/events</b> page. Its copy is canonical in
-          <span class="mono">pages/events/PAGE.md</span> in all five languages.</div></div>
-        <div class="state__row"><div class="state__k">Form fields</div>
-          <div class="state__v">Ime, Email, Telefon (optional), Broj učesnika, Željeni termini,
-          Dodatna napomena. These are the only values this email could ever personalise from.</div></div>
-        <div class="state__row"><div class="state__k">Sender</div>
-          <div class="state__v">Jovan, Šumski Mir. The email is signed by a sub-brand rather than by
-          Izobilje, which is consistent with how the land-facing offers are named.</div></div>
-        <div class="state__row"><div class="state__k">Language</div>
-          <div class="state__v">Serbian only, although the form it answers is published in five
-          languages.</div></div>
-        <div class="state__row"><div class="state__k">Sequence</div>
-          <div class="state__v">1 of a promised 2. The body commits to a second email at the end of
-          September; that one does not exist yet.</div></div>
-      </div>
-
-      <div class="ledger" style="padding:1.6rem 1.8rem;line-height:1.65">
-        <p style="margin:0 0 .85rem">Hvala ti puno na prijavi i želji da se uključiš u akciju obnove Deliblatske peščare! 🌱🌲</p>
-        <p style="margin:0 0 .85rem">Akcija je planirana za kraj oktobra, a čim utvrdimo tačan datum i detalje, obavestićemo
-        sve prijavljene blagovremeno.</p>
-        <p style="margin:0 0 .85rem">Krajem septembra poslaćemo dodatni email sa informacijama o akciji, organizaciji dolaska,
-        potrebnoj opremi i aktivnostima.</p>
-        <p style="margin:0 0 .85rem">Do tada, svaki vid podrške nam mnogo znači. Posebno nam pomaže ako podeliš informacije o
-        akciji na svojim društvenim mrežama i pozoveš prijatelje i kolege da se uključe. Veća
-        vidljivost znači i više ljudi koji mogu doprineti obnovi Deliblatske peščare. 💚</p>
-        <p style="margin:0 0 .85rem">Za naredne objave, volonterske akcije i obaveštenja:</p>
-        <p style="margin:0 0 .85rem">🌲 WhatsApp komuna<br>📅 Događaji<br>📲 Instagram</p>
-        <p style="margin:0 0 .85rem">Tu ćemo redovno objavljivati nove informacije i lakše koordinisati zajednicu kako
-        projekat bude napredovao.</p>
-        <p style="margin:0 0 .85rem">U prilogu ti šaljemo i plakat za prikupljanje donacija za obnovu šume. Slobodno ga
-        odštampaj i podeli sa lokalima i biznisima koji su voljni da podrže akciju obnove. Najbolje
-        ga je postaviti na vidno mesto u objektu gde je najveća cirkulacija ljudi.</p>
-        <p style="margin:0 0 .85rem">Hvala ti što želiš da budeš deo ove priče. Vidimo se u šumi! 🌲</p>
-        <p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p>
-      </div>
-
-      <div class="brief__body">
-        <h2>What it commits us to</h2>
-        <p style="margin:0 0 .85rem">Two dated promises, both of which create work that does not exist yet: a <b>second email
-        at the end of September</b> carrying logistics, equipment and activities, and a
-        <b>confirmed date announcement</b> once late October is fixed.</p>
-        <h2>Open items</h2>
-      </div>
-
-      <div class="state">
-        <div class="state__row"><div class="state__k">The rebuilt site cannot send it</div>
-          <div class="state__v">In the repo-rendered site the form is copy with no backend, so a
-          registration is never captured and this autoresponse never fires. Only the live Lovable
-          build can trigger it today. This is the same gap the planned database closes.</div></div>
-        <div class="state__row"><div class="state__k">No subject line</div>
-          <div class="state__v">The body was supplied without one, so what lands in the inbox is
-          unrecorded.</div></div>
-        <div class="state__row"><div class="state__k">Three links are unresolved</div>
-          <div class="state__v">WhatsApp komuna, Događaji and Instagram appear as labels. Only
-          Događaji has an obvious destination. The one Instagram URL in the site canon is
-          <span class="mono">instagram.com/vikendizam/</span>, a different handle that may not be
-          the right account; the WhatsApp group link appears nowhere in the repo.</div></div>
-        <div class="state__row"><div class="state__k">The poster is missing</div>
-          <div class="state__v">The email refers to an attached donation poster. That file is not in
-          the repo, so the attachment cannot be reproduced or reprinted from here.</div></div>
-        <div class="state__row"><div class="state__k">Serbian only</div>
-          <div class="state__v">A registrant who used the English, German, Dutch or French form
-          still receives this in Serbian.</div></div>
-      </div>
-
-      <div class="brief__foot"><span class="brief__num">&rarr;</span>
-        <span>One email, one form. As more autoresponses arrive, each gets a view named for its
-        form, holding that form's whole sequence.</span></div>
-    </div>`,
 
     /* ---------------------------------------------------------------- contact */
-    contact: `
-      <style>
-      /* Predmet switcher: CSS-only radio tabs. No JavaScript, so nothing depends on the
-         chassis re-running anything after it injects this HTML. */
-      .pm-field{margin:1.4rem 0 .5rem}
-      .pm-label{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-        color:var(--ink-muted);margin-bottom:.6rem}
-      .pm input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-      .pm-tabs{display:flex;flex-wrap:wrap;gap:.4rem}
-      .pm-tabs label{border:1px solid var(--hairline);background:#fff;border-radius:999px;
-        padding:.45rem .95rem;font-size:.85rem;font-weight:600;color:var(--ink);cursor:pointer;
-        transition:background .12s,color .12s,border-color .12s}
-      .pm-tabs label:hover{border-color:var(--accent)}
-      .pm-panel{display:none}
-      .pm-count{font-size:.78rem;color:var(--ink-muted);margin:.9rem 0 0}
-      #pm1:checked ~ .pm-field .pm-tabs label[for=pm1]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm1:checked ~ .pm-panels #pmp1{display:block}
-      #pm2:checked ~ .pm-field .pm-tabs label[for=pm2]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm2:checked ~ .pm-panels #pmp2{display:block}
-      #pm3:checked ~ .pm-field .pm-tabs label[for=pm3]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm3:checked ~ .pm-panels #pmp3{display:block}
-      #pm4:checked ~ .pm-field .pm-tabs label[for=pm4]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm4:checked ~ .pm-panels #pmp4{display:block}
-      #pm5:checked ~ .pm-field .pm-tabs label[for=pm5]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm5:checked ~ .pm-panels #pmp5{display:block}
-      #pm6:checked ~ .pm-field .pm-tabs label[for=pm6]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm6:checked ~ .pm-panels #pmp6{display:block}
-      #pm7:checked ~ .pm-field .pm-tabs label[for=pm7]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm7:checked ~ .pm-panels #pmp7{display:block}
-    </style>
-      <div class="brief"><p class="brief__eyebrow">Emails &middot; contact form</p><h1>Contact form</h1><p class="brief__lede">The contact form on izobilje.com offers seven subjects. Each subject gets its own autoresponse. Switch the subject below to read the reply it triggers.</p><div class="brief__body"><p>The subjects are read straight off the live form and already exist in all five languages. The replies are drafts for approval; none has been sent.</p></div><div class="pm"><input type="radio" name="pm" id="pm1" checked><input type="radio" name="pm" id="pm2"><input type="radio" name="pm" id="pm3"><input type="radio" name="pm" id="pm4"><input type="radio" name="pm" id="pm5"><input type="radio" name="pm" id="pm6"><input type="radio" name="pm" id="pm7"><div class="pm-field"><div class="pm-label">Predmet (subject)</div><div class="pm-tabs"><label for="pm1">Šumski Mir partnership</label><label for="pm2">Donation &amp; Support</label><label for="pm3">Event inquiry</label><label for="pm4">Camping Inquiry</label><label for="pm5">Ranch related activities</label><label for="pm6">Honey order</label><label for="pm7">Other</label></div></div><div class="pm-panels"><div class="pm-panel" id="pmp1"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Šumski Mir partnership</b> &middot; An organisation, business or institution proposing to work together.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for your interest in working with Šumski Mir. 🌲</p><p style="margin:0 0 .85rem">We cannot restore Deliblatska peščara on our own. We work with institutions, businesses and organisations that want to support afforestation, sustainable agriculture and community work.</p><p style="margin:0 0 .85rem">So we can answer you concretely, tell us in a few sentences what you do, what you have in mind, and over what timeframe. If you have a CSR programme or an annual support budget, mention that too.</p><p style="margin:0 0 .85rem">We will come back to you within a few working days with a proposal for what the collaboration could look like.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 1 of 7</p></div><div class="pm-panel" id="pmp2"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Donation &amp; Support</b> &middot; Someone offering money, materials or other support.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for wanting to support the restoration of Deliblatska peščara. 💚</p><p style="margin:0 0 .85rem">Our work runs on donations. Funds go into seedlings, the nursery where we grow future forests, and the organisation of shared planting days.</p><p style="margin:0 0 .85rem">We will come back to you with the ways to donate and with what your support covers specifically.</p><p style="margin:0 0 .85rem">If you would like to help without donating, it means a great deal if you share the action with friends, colleagues and local businesses. We are glad to send you a poster you can print and put up somewhere visible.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 2 of 7</p></div><div class="pm-panel" id="pmp3"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Event inquiry</b> &middot; Someone asking about gatherings, workshops or planting days.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for asking about our events. 🌱</p><p style="margin:0 0 .85rem">Through the year we run tree planting, workshops, yoga sessions and seasonal community gatherings. Dates depend on the season and the weather, so we publish them once they are confirmed.</p><p style="margin:0 0 .85rem">Tell us which kind of event interests you and whether you are coming alone or with a group, and we will send you the next available dates.</p><p style="margin:0 0 .85rem">For announcements and new actions, follow us on Instagram, where we post what is coming up.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 3 of 7</p></div><div class="pm-panel" id="pmp4"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Camping Inquiry</b> &middot; Someone asking about staying at the camp, including overland and RV.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for asking about the camp. ⛺</p><p style="margin:0 0 .85rem">Šumski Mir Co-Working Camp has secluded pitches among the trees, a shared equipped kitchen, a firepit for evening gatherings, reliable internet across the camp and secure parking. The approach is paved, so the camp is reachable by campervan, RV and bicycle.</p><p style="margin:0 0 .85rem">You pay what you feel and what you can. We would rather you came than let the price keep you away.</p><p style="margin:0 0 .85rem">Send us your preferred dates, how many people, and whether you are arriving by vehicle or with a tent, and we will confirm availability.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 4 of 7</p></div><div class="pm-panel" id="pmp5"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Ranch related activities</b> &middot; Someone asking about the farm, volunteering or the technology work.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for your interest in the ranch. 🚜</p><p style="margin:0 0 .85rem">At the ranch we work on shared gardening, afforestation and the use of modern technology in farming, including drones and sensors. Part of that work is done alongside volunteers and partners.</p><p style="margin:0 0 .85rem">Tell us whether you are interested in volunteering, a visit, a collaboration or something specific from our work, and how much time you have.</p><p style="margin:0 0 .85rem">We will come back with dates and with what we most need help on right now.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 5 of 7</p></div><div class="pm-panel" id="pmp6"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Honey order</b> &middot; Someone ordering honey.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for your interest in our honey. 🍯</p><p style="margin:0 0 .85rem">Our honey is pure, raw and unfiltered, collected from the apiaries in the forest around Šumski Mir. Quantities are limited and depend on the season.</p><p style="margin:0 0 .85rem">Tell us how many jars you would like and where you are, and we will confirm availability, price and whether you collect or we ship.</p><p style="margin:0 0 .85rem">If you are able to visit, the nicest way is to collect it here and see where it comes from.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 6 of 7</p></div><div class="pm-panel" id="pmp7"><p class="svc__tags" style="margin:0 0 .9rem">Form value: <b>Other</b> &middot; Anything that does not fit the six subjects above.</p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Thank you for writing to us. 🌲</p><p style="margin:0 0 .85rem">We have received your message and will come back to you within a few working days.</p><p style="margin:0 0 .85rem">If it is urgent, you can also reach us by phone.</p><p style="margin:0 0 .85rem">In the meantime, we post all announcements, actions and news on Instagram.</p><p style="margin:0 0 .85rem">Warm regards,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Reply 7 of 7</p></div></div></div><div class="brief__foot"><span class="brief__num">7</span><span>Seven replies, one form. None has been sent yet.</span></div></div>`,
 
     /* -------------------------------------------------------------- decisions */
     decisions: `
@@ -376,39 +756,16 @@ I18N.en = {
    actually get sent to people, and the reforestation replies go out in Serbian today. The
    editorial views fall back to English through the merge in `html` below, which is why partial
    translation is safe to ship. */
-I18N.sr = {
-  contact: `
-      <style>
-      /* Predmet switcher: CSS-only radio tabs. No JavaScript, so nothing depends on the
-         chassis re-running anything after it injects this HTML. */
-      .pm-field{margin:1.4rem 0 .5rem}
-      .pm-label{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-        color:var(--ink-muted);margin-bottom:.6rem}
-      .pm input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-      .pm-tabs{display:flex;flex-wrap:wrap;gap:.4rem}
-      .pm-tabs label{border:1px solid var(--hairline);background:#fff;border-radius:999px;
-        padding:.45rem .95rem;font-size:.85rem;font-weight:600;color:var(--ink);cursor:pointer;
-        transition:background .12s,color .12s,border-color .12s}
-      .pm-tabs label:hover{border-color:var(--accent)}
-      .pm-panel{display:none}
-      .pm-count{font-size:.78rem;color:var(--ink-muted);margin:.9rem 0 0}
-      #pm1:checked ~ .pm-field .pm-tabs label[for=pm1]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm1:checked ~ .pm-panels #pmp1{display:block}
-      #pm2:checked ~ .pm-field .pm-tabs label[for=pm2]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm2:checked ~ .pm-panels #pmp2{display:block}
-      #pm3:checked ~ .pm-field .pm-tabs label[for=pm3]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm3:checked ~ .pm-panels #pmp3{display:block}
-      #pm4:checked ~ .pm-field .pm-tabs label[for=pm4]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm4:checked ~ .pm-panels #pmp4{display:block}
-      #pm5:checked ~ .pm-field .pm-tabs label[for=pm5]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm5:checked ~ .pm-panels #pmp5{display:block}
-      #pm6:checked ~ .pm-field .pm-tabs label[for=pm6]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm6:checked ~ .pm-panels #pmp6{display:block}
-      #pm7:checked ~ .pm-field .pm-tabs label[for=pm7]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-      #pm7:checked ~ .pm-panels #pmp7{display:block}
-    </style>
-      <div class="brief"><p class="brief__eyebrow">Emails &middot; kontakt forma</p><h1>Kontakt forma</h1><p class="brief__lede">Kontakt forma na izobilje.com nudi sedam predmeta. Svaki predmet dobija svoj automatski odgovor. Promeni predmet ispod da vidiš odgovor koji ga prati.</p><div class="brief__body"><p>Predmeti su preuzeti direktno iz forme na sajtu i postoje na svih pet jezika. Odgovori su nacrti za odobrenje, nijedan još nije poslat.</p></div><div class="pm"><input type="radio" name="pm" id="pm1" checked><input type="radio" name="pm" id="pm2"><input type="radio" name="pm" id="pm3"><input type="radio" name="pm" id="pm4"><input type="radio" name="pm" id="pm5"><input type="radio" name="pm" id="pm6"><input type="radio" name="pm" id="pm7"><div class="pm-field"><div class="pm-label">Predmet</div><div class="pm-tabs"><label for="pm1">Šumski Mir partnerstvo</label><label for="pm2">Donacija i podrška</label><label for="pm3">Upit o događaju</label><label for="pm4">Upit o kampu</label><label for="pm5">Aktivnosti vezane za ranč</label><label for="pm6">Narudžbina meda</label><label for="pm7">Ostalo</label></div></div><div class="pm-panels"><div class="pm-panel" id="pmp1"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Šumski Mir partnerstvo</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti na interesovanju za saradnju sa Šumskim Mirom! 🌲</p><p style="margin:0 0 .85rem">Obnovu Deliblatske peščare ne možemo izvesti sami. Sarađujemo sa institucijama, firmama i organizacijama koje žele da podrže pošumljavanje, održivu poljoprivredu i rad sa zajednicom.</p><p style="margin:0 0 .85rem">Da bismo ti odgovorili konkretno, javi nam u nekoliko rečenica: čime se baviš, šta imaš na umu i u kom vremenskom okviru. Ako imate CSR program ili godišnji budžet za podršku, napomeni i to.</p><p style="margin:0 0 .85rem">Javićemo se u roku od nekoliko radnih dana sa predlogom kako bi saradnja mogla da izgleda.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 1 od 7</p></div><div class="pm-panel" id="pmp2"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Donacija i podrška</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti puno na želji da podržiš obnovu Deliblatske peščare! 💚</p><p style="margin:0 0 .85rem">Naš rad je zasnovan na donacijama. Sredstva idu u sadnice, rasadnik iz kog uzgajamo buduće šume i organizaciju zajedničkih akcija sadnje.</p><p style="margin:0 0 .85rem">Javićemo ti se sa detaljima o načinima donacije i o tome šta konkretno tvoja podrška pokriva.</p><p style="margin:0 0 .85rem">Ako želiš da pomogneš i bez donacije, mnogo nam znači ako podeliš informacije o akciji sa prijateljima, kolegama i lokalnim biznisima. Rado ti šaljemo plakat koji možeš odštampati i postaviti na vidno mesto.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 2 od 7</p></div><div class="pm-panel" id="pmp3"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Upit o događaju</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti na upitu o našim događajima! 🌱</p><p style="margin:0 0 .85rem">Kroz godinu organizujemo sadnju drveća, radionice, joga sesije i sezonska okupljanja zajednice. Termini zavise od godišnjeg doba i vremenskih uslova, pa ih objavljujemo kada su potvrđeni.</p><p style="margin:0 0 .85rem">Javi nam koji te tip događaja zanima i da li dolaziš sam ili sa grupom, pa ćemo ti poslati prve slobodne termine.</p><p style="margin:0 0 .85rem">Za sve najave i nove akcije prati nas na Instagramu, gde redovno objavljujemo šta se sprema.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 3 od 7</p></div><div class="pm-panel" id="pmp4"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Upit o kampu</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti na upitu o kampu! ⛺</p><p style="margin:0 0 .85rem">Šumski Mir Co-Working Camp nudi izolovana mesta među drvećem, zajedničku opremljenu kuhinju, ognjište za večernja okupljanja, pouzdan internet u celom kampu i siguran parking. Prilaz je asfaltiran, pa je kamp dostupan i za kampere, RV vozila i bicikle.</p><p style="margin:0 0 .85rem">Kod nas plaćaš koliko želiš i koliko možeš. Radije bismo da dođeš nego da te cena zadrži.</p><p style="margin:0 0 .85rem">Javi nam željene datume, broj ljudi i da li dolaziš vozilom ili šatorom, pa ćemo ti potvrditi da li imamo mesta.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 4 od 7</p></div><div class="pm-panel" id="pmp5"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Aktivnosti vezane za ranč</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti na interesovanju za ranč! 🚜</p><p style="margin:0 0 .85rem">Na ranču se bavimo zajedničkim baštovanstvom, pošumljavanjem i primenom savremene tehnologije u poljoprivredi, uključujući dronove i senzore. Deo posla radimo zajedno sa volonterima i partnerima.</p><p style="margin:0 0 .85rem">Javi nam da li te zanima volontiranje, poseta, saradnja ili nešto konkretno iz našeg rada, i koliko vremena imaš na raspolaganju.</p><p style="margin:0 0 .85rem">Javićemo ti se sa terminima i sa onim što nam je trenutno najpotrebnije.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 5 od 7</p></div><div class="pm-panel" id="pmp6"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Narudžbina meda</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti na interesovanju za naš med! 🍯</p><p style="margin:0 0 .85rem">Naš med je čist, sirov i nefiltriran, sakupljen iz pčelinjaka u šumi oko Šumskog Mira. Količine su ograničene i zavise od sezone.</p><p style="margin:0 0 .85rem">Javi nam koliko tegli želiš i gde se nalaziš, pa ćemo ti potvrditi dostupnost, cenu i način preuzimanja ili slanja.</p><p style="margin:0 0 .85rem">Ako si u prilici da svratiš, najlepše je preuzeti med kod nas i videti odakle dolazi.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 6 od 7</p></div><div class="pm-panel" id="pmp7"><p class="svc__tags" style="margin:0 0 .9rem">Predmet: <b>Ostalo</b></p><div class="ledger" style="padding:1.5rem 1.7rem;line-height:1.6"><p style="margin:0 0 .85rem">Hvala ti što si nam pisao! 🌲</p><p style="margin:0 0 .85rem">Primili smo tvoju poruku i javićemo ti se u roku od nekoliko radnih dana.</p><p style="margin:0 0 .85rem">Ako je u pitanju nešto hitno, možeš nas dobiti i telefonom.</p><p style="margin:0 0 .85rem">U međuvremenu, sve najave, akcije i novosti objavljujemo na Instagramu.</p><p style="margin:0 0 .85rem">Srdačan pozdrav,<br>Jovan<br>Šumski Mir</p></div><p class="pm-count">Odgovor 7 od 7</p></div></div></div><div class="brief__foot"><span class="brief__num">7</span><span>Sedam odgovora, jedna forma. Nijedan još nije poslat.</span></div></div>`,
-};
+I18N.sr = {};
+
+
+/* Email views are generated from EMAILS for every language layer, so the two forms share
+   one template and a follow-up is a data edit rather than markup. */
+["en", "sr"].forEach(function (l) {
+  I18N[l] = I18N[l] || {};
+  I18N[l].contact = renderEmail("contact", l);
+  I18N[l].planting = renderEmail("planting", l);
+});
 
 function pickLang() {
   try {
@@ -480,7 +837,7 @@ window.HUB = {
     { section: "Emails", items: [
       { view: "contact", label: "Contact form", badge: 7,
         icon: "<svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6'><path d='M4 4h16v12H7l-3 3z'/></svg>" },
-      { view: "planting", label: "Reforestation signup", badge: 1,
+      { view: "planting", label: "Reforestation signup", badge: 3,
         icon: "<svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6'><rect x='3' y='5' width='18' height='14' rx='2'/><path d='M3 7l9 6 9-6'/></svg>" },
     ]},
     { section: "Governance", items: [
@@ -495,10 +852,10 @@ window.HUB = {
     audiences: { title: "Who it's for", sub: "The people the work is aimed at, in tiers" },
     website:   { title: "izobilje.com", sub: "14 routes, 5 languages, rendered from the repo",
                  open: WEB, openLabel: "Open the site ↗", tbBadge: "Live mirror", infoPane: true },
-    contact:   { title: "Contact form", sub: "Seven subjects, seven autoresponses",
+    contact:   { title: "Contact form", sub: "Seven subjects, one sequence each",
                  open: WEB + "contact/", openLabel: "Open the form ↗", tbBadge: "Drafts" },
-    planting:  { title: "Reforestation signup", sub: "Autoresponse, and the form that triggers it",
-                 open: WEB + "events/", openLabel: "Open the form ↗", tbBadge: "Live" },
+    planting:  { title: "Reforestation signup", sub: "One signup, a three-email sequence",
+                 open: WEB + "events/", openLabel: "Open the form ↗", tbBadge: "1 sent · 2 planned" },
     decisions: { title: "Decisions & open questions", sub: "What is settled, and what is not" },
   },
 
