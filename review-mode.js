@@ -328,10 +328,16 @@ function anchorImagePass(){
  *   · Video is REFUSED with an explicit message. A phone clip is tens of megabytes; storing it as
  *     a data URL would blow the quota and silently corrupt every existing comment. Pretending to
  *     accept it and dropping the bytes would be worse than saying no.
- * Set FIREBASE_CONFIG.storageBucket and this path switches to real uploads for both.
+ * Set OBJECT_STORAGE:true and this path switches to real uploads for both.
+ *
+ * The gate is that EXPLICIT flag, not the presence of FIREBASE_CONFIG.storageBucket. Every
+ * Firebase web config carries a storageBucket string whether or not Cloud Storage has ever
+ * been provisioned, so keying off it would advertise video uploads that fail at write time
+ * with a 402/403. Cloud Storage has required the paid Blaze plan since 3 Feb 2026; Izobilje
+ * is on Spark for comments only, and raw media goes through `intake/` instead.
  * ------------------------------------------------------------------------- */
 var MEDIA_MAX_PX = 1600, MEDIA_QUALITY = 0.82, MEDIA_MAX_BYTES = 700 * 1024;
-function hasObjectStorage(){ return !!(FB && FB.storageBucket); }
+function hasObjectStorage(){ return !!(CFG && CFG.OBJECT_STORAGE); }
 
 function shrinkImage(file){
   return new Promise(function(res, rej){

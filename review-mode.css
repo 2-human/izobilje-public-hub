@@ -59,6 +59,32 @@
 [data-review-mode="on"] .review-modal .rw-save:hover{background:var(--rw-dark)}
 @media (max-width:900px){[data-review-mode="on"] .review-sidebar{width:84vw}}
 
+/* Reserve the sidebar's width rather than overlaying the page. You comment by clicking the
+   text itself, so a sidebar sitting on top of the main column hides the very thing being
+   reviewed — the right-hand third of every paragraph was unreachable. The hub's <body> is a
+   CSS grid (nav + content), so padding here shrinks the content column instead of clipping
+   it, and the whole column stays visible and clickable. Same mechanism as the banner's
+   padding-top above.
+   Below 900px the sidebar is 84vw: reserving that would leave a sliver of content, so it
+   deliberately keeps overlaying there. */
+@media (min-width:901px){
+  [data-review-mode="on"] body{padding-right:330px}
+}
+
+/* The hub's own off-canvas drawer (.sitepane, the website preview) is position:fixed at
+   right:0, so the body padding above cannot move it — opened in review mode it slid straight
+   under the comments panel. Shift it to sit flush against the panel instead, and push the
+   closed transform out by the same amount so it still parks fully off-canvas rather than
+   leaving a sliver hidden behind the panel by z-index alone. The dimming overlay stops short
+   of the panel too, because you need to read comments while the drawer is open.
+   This lives here, not in index.html: the chassis is pinned, and the conflict only exists in
+   review mode. Mirrors the 900px breakpoint above, where the panel goes back to overlaying. */
+@media (min-width:901px){
+  [data-review-mode="on"] .sitepane{right:330px;transform:translateX(calc(100% + 330px))}
+  [data-review-mode="on"] .sitepane.open{transform:translateX(0)}
+  [data-review-mode="on"] .sitepane-overlay{right:330px}
+}
+
 /* status tabs */
 [data-review-mode="on"] .review-tabs{display:flex;border-bottom:1px solid #eceef0;background:#fafbfc}
 [data-review-mode="on"] .review-tabs button{flex:1;border:none;background:none;padding:9px 4px;font:600 12px/1 -apple-system,sans-serif;color:#65676b;cursor:pointer;border-bottom:2px solid transparent}
