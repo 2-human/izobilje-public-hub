@@ -315,6 +315,60 @@ function anchorImagePass(){
   });
 }
 
+
+/* ---------------------------------------------------------------------------
+ * Attachments (added 2026-08-18)
+ * ---------------------------------------------------------------------------
+ * The team attaches the photo or video for a planned post directly to a comment.
+ *
+ * There is no object storage configured on this hub (FIREBASE_CONFIG is blank, so comments live
+ * in localStorage). That is a hard limit, not a style choice:
+ *   · Images are downscaled in the browser to MEDIA_MAX_PX / MEDIA_QUALITY and kept as data URLs.
+ *     Typical result is 150-400KB, so a handful fit inside the ~5MB localStorage budget.
+ *   · Video is REFUSED with an explicit message. A phone clip is tens of megabytes; storing it as
+ *     a data URL would blow the quota and silently corrupt every existing comment. Pretending to
+ *     accept it and dropping the bytes would be worse than saying no.
+ * Set FIREBASE_CONFIG.storageBucket and this path switches to real uploads for both.
+ * ------------------------------------------------------------------------- */
+var MEDIA_MAX_PX = 1600, MEDIA_QUALITY = 0.82, MEDIA_MAX_BYTES = 700 * 1024;
+function hasObjectStorage(){ return !!(FB && FB.storageBucket); }
+
+function shrinkImage(file){
+  return new Promise(function(res, rej){
+    var img = new Image(), url = URL.createObjectURL(file);
+    img.onload = function(){
+      var w = img.width, h = img.height, sc = Math.min(1, MEDIA_MAX_PX / Math.max(w, h));
+      var c = document.createElement('canvas');
+      c.width = Math.round(w * sc); c.height = Math.round(h * sc);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      var out = c.toDataURL('image/jpeg', MEDIA_QUALITY);
+      if (out.length * 0.75 > MEDIA_MAX_BYTES) out = c.toDataURL('image/jpeg', 0.6);
+      res({ kind: 'image', name: file.name, size: file.size, dataUrl: out, local: true });
+    };
+    img.onerror = function(){ URL.revokeObjectURL(url); rej(new Error('not an image')); };
+    img.src = url;
+  });
+}
+
+function acceptFiles(files){
+  var out = [], skipped = [];
+  var jobs = Array.prototype.map.call(files, function(f){
+    var isVideo = /^video\//.test(f.type);
+    if (isVideo && !hasObjectStorage()){
+      skipped.push(f.name + ' — video needs object storage; configure FIREBASE_CONFIG.storageBucket');
+      return Promise.resolve(null);
+    }
+    if (isVideo){
+      skipped.push(f.name + ' — video upload path not wired yet');
+      return Promise.resolve(null);
+    }
+    if (!/^image\//.test(f.type)){ skipped.push(f.name + ' — unsupported type'); return Promise.resolve(null); }
+    return shrinkImage(f).then(function(m){ out.push(m); }).catch(function(){ skipped.push(f.name + ' — could not read'); });
+  });
+  return Promise.all(jobs).then(function(){ return { media: out, skipped: skipped }; });
+}
+
 function modal(title,ctx,initText,initRepl,onSave,opts){
   opts = opts || {};
   const ov=el('div','review-modal-overlay');const m=el('div','review-modal');
@@ -322,6 +376,38 @@ function modal(title,ctx,initText,initRepl,onSave,opts){
   const ta=el('textarea');ta.placeholder=L.placeholder;ta.value=initText||'';
   const tr=el('textarea');tr.placeholder=L.replacementPlaceholder;tr.value=initRepl||'';tr.style.minHeight='44px';
   m.appendChild(ta);m.appendChild(tr);
+
+  /* Attachments picker */
+  var picked = (opts.media || []).slice();
+  var mWrap = el('div','rw-media');
+  var mBtn  = el('label','rw-media__btn');
+  mBtn.textContent = L.attach || 'Attach photo';
+  var mIn = document.createElement('input');
+  mIn.type='file'; mIn.accept='image/*' + (hasObjectStorage() ? ',video/*' : ''); mIn.multiple=true;
+  mIn.style.display='none';
+  mBtn.appendChild(mIn);
+  var mList = el('div','rw-media__list');
+  var mNote = el('div','rw-media__note');
+  mNote.textContent = hasObjectStorage() ? ''
+    : (L.attachLocalOnly || 'Photos are stored in this browser only, and resized. Video needs object storage.');
+  function paintMedia(){
+    mList.innerHTML='';
+    picked.forEach(function(m,i){
+      var t=el('span','rw-media__item');
+      t.innerHTML = '<img src="'+m.dataUrl+'" alt=""><b>'+esc(m.name)+'</b>';
+      var x=el('button','rw-media__x','×'); x.onclick=function(){picked.splice(i,1);paintMedia();};
+      t.appendChild(x); mList.appendChild(t);
+    });
+  }
+  mIn.onchange=function(){
+    acceptFiles(mIn.files).then(function(r){
+      picked = picked.concat(r.media); paintMedia();
+      if(r.skipped.length) mNote.textContent = r.skipped.join(' · ');
+      mIn.value='';
+    });
+  };
+  mWrap.appendChild(mBtn); mWrap.appendChild(mList); mWrap.appendChild(mNote);
+  m.appendChild(mWrap); paintMedia();
   /* Scope chooser (added 2026-06-30 for cross-LP commenting). Only shown when
    * opts.slot is provided (anchored element had data-slot). Three radios; the
    * "Specific pages…" choice expands a checkbox list. State held inside the
@@ -380,7 +466,7 @@ function modal(title,ctx,initText,initRepl,onSave,opts){
   const save=el('button','rw-save',esc(L.save));
   save.onclick=()=>{
     const t=ta.value.trim(),r=tr.value.trim();
-    if(!t&&!r)return;
+    if(!t&&!r&&!(picked&&picked.length))return;
     let resolvedScope = null;
     if(opts.slot){
       if(scopeChoice === 'all') resolvedScope = 'all';
@@ -390,7 +476,7 @@ function modal(title,ctx,initText,initRepl,onSave,opts){
         resolvedScope = subset;
       } // 'single' → leave resolvedScope null (page-local)
     }
-    onSave(t, r, resolvedScope);
+    onSave(t, r, resolvedScope, picked);
     ov.remove();
   };
   acts.appendChild(cancel);acts.appendChild(save);m.appendChild(acts);ov.appendChild(m);
@@ -408,13 +494,14 @@ function openComposer(anchor,elm){
   const slotCarrier = elm.closest && elm.closest('[data-slot]');
   const slot = slotCarrier ? slotCarrier.getAttribute('data-slot') : null;
   const defaultScope = defaultScopeForSlot(slot);
-  modal('Add comment', anchor, '', '', (text, repl, scope) => {
+  modal('Add comment', anchor, '', '', (text, repl, scope, media) => {
     const rec = {
       comment: text, replacement: repl || null,
       anchor: anchor, page: pageKey,
       author: ME, status: 'pending', timestamp: Date.now(),
       text_preview: prev, url: location.href, user_agent: navigator.userAgent
     };
+    if (media && media.length) rec.media = media;
     if(slot){
       rec.slot = slot;
       // 'single' (default) leaves scope undefined → behaves as page-local.
@@ -508,11 +595,15 @@ function render(){
     row.innerHTML='<div class="rw-meta"><b>'+esc(c.author||'Anonymous')+'</b><span class="rw-badge rw-'+st+'">'+blabel+'</span>'+scopeBadge+jumpChip+'<span>'+when(c.timestamp)+(c.edited_at?' · edited':'')+'</span></div>'+
       '<div class="rw-body">'+esc(c.comment||'')+'</div>'+
       (c.replacement?'<div class="rw-repl">↳ '+esc(c.replacement)+'</div>':'')+
+      ((c.media&&c.media.length)?'<div class="rw-att">'+c.media.map(function(m){
+        return '<a class="rw-att__i" href="'+(m.url||m.dataUrl)+'" target="_blank" rel="noopener" title="'+esc(m.name)+'">'
+             + '<img src="'+(m.url||m.dataUrl)+'" alt="'+esc(m.name)+'"></a>';
+      }).join('')+'</div>':'')+
       (st==='resolved'&&c.resolution?'<div class="rw-resolution">✓ '+esc(c.resolution)+'</div>':'')+
       '<div class="rw-anchor">'+esc(c.slot ? ('slot · '+c.slot) : c.anchor)+'</div>';
     const acts=el('div','rw-acts');
     if(st==='pending'){
-      acts.appendChild(actBtn(L.edit,'edit-btn',()=>modal('Edit comment',c.anchor,c.comment||'',c.replacement||'',(t,r)=>ADAPTER.update(id,{comment:t,replacement:r||null,edited_at:Date.now()}))));
+      acts.appendChild(actBtn(L.edit,'edit-btn',()=>modal('Edit comment',c.anchor,c.comment||'',c.replacement||'',(t,r,sc,media)=>ADAPTER.update(id,{comment:t,replacement:r||null,media:(media&&media.length)?media:null,edited_at:Date.now()}),{media:c.media||[]})));
       acts.appendChild(actBtn(L.resolve,'resolve-btn',()=>{const note=(window.prompt(L.resolvePrompt,'')||'').trim();ADAPTER.update(id,{status:'resolved',resolution:note||('Resolved · '+ME),resolved_at:Date.now(),resolved_by:ME});}));
     } else {
       acts.appendChild(actBtn(L.reopen,'restore-btn',()=>ADAPTER.update(id,{status:'pending',resolution:null})));

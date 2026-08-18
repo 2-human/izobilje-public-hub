@@ -58,6 +58,10 @@ window.IZOBILJE_REVIEW_CONFIG = {
     resolvePrompt: "Resolution note (what was done):",
     placeholder: "Your feedback…",
     replacementPlaceholder: "Suggested change (optional)…",
-    namePrompt: "Your name (so the team knows who left this comment):"
+    namePrompt: "Your name (so the team knows who left this comment):",
+    attach: "Attach photo",
+    attachLocalOnly: "Photos are resized and stored in THIS browser only — they are not shared and "
+      + "will not survive clearing site data. Video needs object storage: set "
+      + "FIREBASE_CONFIG.storageBucket below."
   }
 };
