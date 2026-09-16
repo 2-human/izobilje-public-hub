@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<script>
+  // Some files exist only locally: the ZIPs are left off the public copy, and GitHub refuses any
+  // file over 100 MB (the 4K camp original is 386 MB). Ask the server, and retire the buttons that
+  // would lead nowhere instead of showing a dead link.
+  window.retireMissingDownloads = async function (root) {
+    const links = [...(root || document).querySelectorAll("a[download]:not([data-checked])")];
+    await Promise.all(links.map(async a => {
+      a.dataset.checked = "1";
+      let ok = false;
+      try { ok = (await fetch(a.href, {method: "HEAD", cache: "no-store"})).ok; } catch (e) {}
+      if (ok) return;
+      if (/\.zip$/i.test(a.getAttribute("href"))) { a.hidden = true; return; }
+      const note = document.createElement("span");
+      note.className = "btn"; note.setAttribute("aria-disabled", "true");
+      note.style.cssText = "opacity:.55;cursor:default";
+      note.title = "Fajl je veći od 100 MB, koliko GitHub dozvoljava, pa nije objavljen na webu.";
+      note.textContent = "Original prevelik za web";
+      a.replaceWith(note);
+    }));
+  };
+</script>
+<title>COP31 Bike Ride — pregled objava</title>
+<style>
+  :root{
+    --ground:#16181b; --panel:#1f2226; --line:#2e3238; --ink:#eceff2; --muted:#9aa3ad;
+    --leaf:#cfe8b4; --green:#2e5e35; --ig:#3897f0; --fb:#0866ff;
+    --phone-w:360px; --phone-h:640px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);
+       font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+  header{padding:22px 28px 6px}
+  header h1{margin:0;font-size:18px;font-weight:650;letter-spacing:.01em}
+  header p{margin:4px 0 0;color:var(--muted);max-width:70ch}
+
+  .stage{display:flex;flex-wrap:wrap;gap:40px;padding:18px 28px 8px;align-items:flex-start}
+  .device{display:flex;flex-direction:column;gap:10px;align-items:center}
+  .device-label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .phone{position:relative;width:var(--phone-w);height:var(--phone-h);border-radius:34px;overflow:hidden;
+         background:#000;box-shadow:0 0 0 9px #0b0c0e,0 0 0 10px #3a3f46,0 24px 60px rgba(0,0,0,.55);
+         user-select:none;-webkit-user-select:none;touch-action:manipulation}
+  .phone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+  .shade-top{position:absolute;left:0;right:0;top:0;height:110px;pointer-events:none;
+             background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,0))}
+  .shade-bot{position:absolute;left:0;right:0;bottom:0;height:120px;pointer-events:none;
+             background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.45))}
+
+  .bars{position:absolute;left:8px;right:8px;top:9px;display:flex;gap:3px;pointer-events:none}
+  .bars span{flex:1;height:2px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden}
+  .bars i{display:block;height:100%;width:0;background:#fff}
+
+  .head{position:absolute;left:12px;right:10px;top:20px;display:flex;align-items:center;gap:8px;
+        pointer-events:none;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+  .avatar{width:32px;height:32px;border-radius:50%;background:#2e7d5b url(avatar.png) center/cover;flex:none}
+  .fb .avatar{width:36px;height:36px;box-shadow:0 0 0 2px var(--fb)}
+  .name{font-weight:600;font-size:13.5px;color:#fff}
+  .time{color:rgba(255,255,255,.75);font-size:13px}
+  .head .sp{flex:1}
+  .icon{width:22px;height:22px;display:grid;place-items:center;color:#fff;font-size:18px;line-height:1}
+
+  .foot{position:absolute;left:12px;right:12px;bottom:14px;display:flex;align-items:center;gap:14px;pointer-events:none}
+  .ig .reply{flex:1;height:42px;border:1px solid rgba(255,255,255,.75);border-radius:22px;
+             display:flex;align-items:center;padding:0 16px;color:rgba(255,255,255,.9);font-size:14px}
+  .fb .reply{flex:1;height:40px;border-radius:20px;background:rgba(255,255,255,.18);
+             display:flex;align-items:center;padding:0 16px;color:rgba(255,255,255,.92);font-size:14px}
+  .fb .react{font-size:22px;line-height:1}
+  svg.ico{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.8}
+
+  /* In-app stickers — mocked where the spec places them */
+  .sticker{position:absolute;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;
+           background:#fff;border-radius:9px;padding:7px 12px;font-weight:800;font-size:15px;letter-spacing:.01em;
+           box-shadow:0 2px 10px rgba(0,0,0,.25);display:flex;gap:6px;align-items:center}
+  .ig .sticker.mention{text-transform:uppercase;
+           background-image:none;color:transparent;
+           background:linear-gradient(#fff,#fff) padding-box}
+  .ig .sticker.mention b{background:linear-gradient(90deg,#8a3ab9,#e95950 55%,#fccc63);
+           -webkit-background-clip:text;background-clip:text;color:transparent}
+  .ig .sticker.link{color:var(--ig);text-transform:uppercase}
+  .fb .sticker.mention{color:#050505}
+  .fb .sticker.link{color:var(--fb)}
+  .hide-stickers .sticker{display:none}
+
+  .safe{position:absolute;left:0;right:0;pointer-events:none;display:none;
+        background:repeating-linear-gradient(45deg,rgba(255,70,70,.28) 0 6px,rgba(255,70,70,.1) 6px 12px);
+        border:1px dashed rgba(255,90,90,.9)}
+  .show-safe .safe{display:block}
+
+  .paused-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:none;
+        background:rgba(0,0,0,.55);border-radius:50%;width:64px;height:64px;place-items:center;font-size:26px}
+  .is-paused .paused-badge{display:grid}
+
+  .controls{padding:10px 28px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  button,.chip{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+        border-radius:9px;padding:7px 12px;cursor:pointer}
+  button:hover,.chip:hover{border-color:#4b525b}
+  button:focus-visible,.chip:focus-visible,input:focus-visible{outline:2px solid var(--leaf);outline-offset:2px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding:6px 10px;min-width:92px}
+  .chip small{color:var(--muted);font-size:11.5px;font-variant-numeric:tabular-nums}
+  .chip[aria-current="true"]{border-color:var(--leaf);box-shadow:inset 0 0 0 1px var(--leaf)}
+  label.toggle{display:flex;gap:7px;align-items:center;color:var(--muted);cursor:pointer}
+
+  .notes{padding:18px 28px 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;max-width:1180px}
+  .note{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .note h2{margin:0 0 8px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--leaf)}
+  .note ol,.note ul{margin:0;padding-left:18px}
+  .note li{margin:3px 0}
+  .note code{background:#15171a;border:1px solid var(--line);border-radius:5px;padding:0 5px;font-size:12.5px}
+  .meta{color:var(--muted);font-variant-numeric:tabular-nums;font-size:12.5px;min-height:1.4em}
+  .slides{padding:26px 28px 6px;max-width:1180px}
+  .slides-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px 18px;margin-bottom:14px}
+  .slides-head h2{margin:0;font-size:16px;font-weight:650}
+  .slides-head p{margin:0;color:var(--muted)}
+  .slides-head .sp{flex:1}
+  a.btn,button.btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font:inherit;font-size:13px;
+        color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}
+  a.btn:hover,button.btn:hover{border-color:#4b525b}
+  a.btn.primary{background:var(--green);border-color:#3f7a48;color:#fff}
+  a.btn.primary:hover{border-color:var(--leaf)}
+  a.btn:focus-visible,button.btn:focus-visible{outline:2px solid var(--leaf);outline-offset:2px}
+  .btn small{color:inherit;opacity:.7;font-variant-numeric:tabular-nums}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+  .card{display:grid;grid-template-columns:96px 1fr;gap:14px;background:var(--panel);border:1px solid var(--line);
+        border-radius:12px;padding:12px}
+  .card[aria-current="true"]{border-color:var(--leaf)}
+  .thumb{width:96px;height:171px;border-radius:8px;overflow:hidden;background:#000;border:0;padding:0;cursor:pointer;position:relative}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb span{position:absolute;left:6px;top:6px;background:rgba(0,0,0,.6);color:#fff;border-radius:6px;
+        font-size:11px;font-weight:700;padding:1px 6px}
+  .card-body{display:flex;flex-direction:column;gap:8px;min-width:0}
+  .card-title{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+  .card-title b{font-size:14px}
+  .card-title small{color:var(--muted);font-variant-numeric:tabular-nums}
+  .dl{display:flex;flex-wrap:wrap;gap:6px}
+  .textbox{position:relative;background:#15171a;border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+  .textbox pre{margin:6px 0 0;white-space:pre-wrap;word-break:break-word;font-family:inherit;font-size:13px;line-height:1.45;color:#d7dce1}
+  .textbox.empty pre{color:var(--muted);font-style:italic}
+  .row{display:flex;gap:6px;align-items:center;justify-content:space-between}
+  .label{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  .stk{display:flex;flex-direction:column;gap:5px}
+  .stk-item{display:flex;align-items:center;gap:8px;min-width:0}
+  .stk-item code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:#15171a;
+        border:1px solid var(--line);border-radius:6px;padding:3px 7px;font-size:12px}
+  .stk-type{font-size:11px;color:var(--leaf);width:56px;flex:none}
+  .copied{border-color:var(--leaf)!important;color:var(--leaf)!important}
+
+  /* ---------- tabs ---------- */
+  .tabs{display:flex;gap:4px;padding:14px 28px 0;border-bottom:1px solid var(--line)}
+  .tabs a{color:var(--muted);text-decoration:none;padding:9px 14px;border-radius:9px 9px 0 0;font-weight:600;
+          border:1px solid transparent;border-bottom:0;margin-bottom:-1px}
+  .tabs a:hover{color:var(--ink)}
+  .tabs a[aria-selected="true"]{color:var(--ink);background:var(--ground);border-color:var(--line)}
+  .tabs a:focus-visible{outline:2px solid var(--leaf);outline-offset:-2px}
+  .intro{padding:16px 28px 0;margin:0;color:var(--muted);max-width:78ch}
+
+  /* ---------- light feed phones ---------- */
+  .phone.feed{background:#fff;color:#0c0c0d;overflow-y:auto;scrollbar-width:none;user-select:text;-webkit-user-select:text}
+  .phone.feed::-webkit-scrollbar{display:none}
+  .appbar{position:sticky;top:0;z-index:3;height:46px;display:flex;align-items:center;justify-content:space-between;
+          padding:0 14px;background:#fff;border-bottom:1px solid #efefef}
+  .ig-word{font:italic 600 24px/1 "Snell Roundhand","Brush Script MT",Georgia,serif;letter-spacing:.2px}
+  .fb-word{font:800 26px/1 -apple-system,Helvetica,Arial,sans-serif;color:#0866ff;letter-spacing:-.8px}
+  .appbar .icons{display:flex;gap:16px}
+  .appbar svg{width:24px;height:24px;stroke:#0c0c0d;fill:none;stroke-width:1.8}
+  .fb-bg{background:#f0f2f5}
+  .fb .appbar{border-bottom:0}
+  .fb .appbar svg{stroke:#050505}
+
+  .ph{display:flex;align-items:center;gap:9px;padding:10px 12px}
+  .ph .avs{position:relative;width:38px;height:32px;flex:none}
+  .ph .av{position:absolute;width:30px;height:30px;border-radius:50%;background:#2e7d5b url(avatar.png) center/cover;border:2px solid #fff}
+  .ph .av.b{left:10px;top:4px;background:#d9dde2;display:grid;place-items:center;font:700 10px/1 sans-serif;color:#44505c}
+  .ph .who{flex:1;min-width:0;font-size:13.5px;line-height:1.25}
+  .ph .who b{font-weight:600}
+  .ph .who small{display:block;color:#737373;font-size:12px}
+  .ph .dots{font-size:18px;color:#262626}
+
+  .car{position:relative}
+  .car-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .car-track::-webkit-scrollbar{display:none}
+  .car-item{flex:0 0 100%;aspect-ratio:4/5;scroll-snap-align:start;background:#000;position:relative}
+  /* .phone video is absolutely positioned for full-screen stories; carousel videos sit in the flow */
+  .car-item img,.car-item video{position:static;inset:auto;width:100%;height:100%;object-fit:cover;display:block}
+  .car-count{position:absolute;right:10px;top:10px;background:rgba(18,18,18,.7);color:#fff;border-radius:12px;
+             font:600 12px/1 sans-serif;padding:6px 9px;z-index:2}
+  .car-arrow{position:absolute;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;border:0;
+             background:rgba(255,255,255,.85);color:#262626;display:grid;place-items:center;padding:0;font-size:16px;z-index:2;cursor:pointer}
+  .car-arrow.l{left:8px}.car-arrow.r{right:8px}
+  .car-arrow[disabled]{display:none}
+  .vid-badge{position:absolute;right:10px;bottom:10px;width:26px;height:26px;border-radius:50%;background:rgba(18,18,18,.65);
+             color:#fff;display:grid;place-items:center;font-size:11px}
+  .actions{display:flex;align-items:center;padding:8px 10px 4px;gap:14px;position:relative}
+  .actions svg{width:25px;height:25px;stroke:#0c0c0d;fill:none;stroke-width:1.8}
+  .actions .sp{flex:1}
+  .car-dots{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:4px}
+  .car-dots i{width:6px;height:6px;border-radius:50%;background:#c4c4c4}
+  .car-dots i.on{background:#0095f6}
+  .cap{padding:2px 12px 12px;font-size:13.5px;line-height:1.4;white-space:pre-wrap;word-wrap:break-word}
+  .cap b{font-weight:600}
+  .cap .more{color:#737373;cursor:pointer;background:none;border:0;padding:0;font:inherit}
+  .cap .tag{color:#00376b}
+  .when{padding:0 12px 16px;color:#737373;font-size:11px;letter-spacing:.02em}
+
+  .fbpost{background:#fff;margin-top:8px}
+  .fbpost .ph .av{width:40px;height:40px;position:static;border:0}
+  .fbpost .ph .avs{width:40px;height:40px}
+  .fbpost .who{font-size:14px}
+  .fbpost .who small{color:#65676b;font-size:12.5px}
+  .fbcap{padding:0 12px 10px;font-size:14.5px;line-height:1.38;color:#050505;white-space:pre-wrap;word-wrap:break-word}
+  .fbcap .more{color:#050505;font-weight:600;cursor:pointer;background:none;border:0;padding:0;font:inherit;font-weight:600}
+  .fbcap .tag{color:#0064d1}
+  .fbgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;cursor:zoom-in}
+  .fbgrid .g{position:relative;background:#000;overflow:hidden;border:0;padding:0}
+  .fbgrid .g img{width:100%;height:100%;object-fit:cover;display:block}
+  .fbgrid .g.top{grid-column:span 3;aspect-ratio:1}
+  .fbgrid .g.bot{grid-column:span 2;aspect-ratio:1}
+  .fbgrid .plus{position:absolute;inset:0;background:rgba(0,0,0,.45);color:#fff;display:grid;place-items:center;font:600 30px/1 sans-serif}
+  .fbgrid .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;
+                background:rgba(0,0,0,.5);border:2px solid #fff;color:#fff;display:grid;place-items:center;font-size:15px}
+  .fbstats{display:flex;justify-content:space-around;border-top:1px solid #ced0d4;margin:8px 12px 0;padding:6px 0 10px;
+           color:#65676b;font-weight:600;font-size:13.5px}
+
+  /* ---------- reels ---------- */
+  .reel-ui{position:absolute;inset:0;pointer-events:none;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+  .reel-top{position:absolute;left:14px;right:14px;top:14px;display:flex;justify-content:space-between;align-items:center;font:700 19px/1 -apple-system,sans-serif}
+  .reel-top svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.8}
+  .rail{position:absolute;right:10px;bottom:92px;display:flex;flex-direction:column;align-items:center;gap:16px;font-size:11.5px;font-weight:600}
+  .rail div{display:flex;flex-direction:column;align-items:center;gap:3px}
+  .rail svg{width:27px;height:27px;stroke:#fff;fill:none;stroke-width:1.9}
+  .rail .emoji{font-size:24px;line-height:1}
+  .rail .audio{width:28px;height:28px;border-radius:7px;border:2px solid #fff;background:#2e7d5b url(avatar.png) center/cover}
+  .reel-bottom{position:absolute;left:12px;right:62px;bottom:18px;display:flex;flex-direction:column;gap:8px;pointer-events:auto}
+  .reel-who{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600}
+  .reel-who .av{width:30px;height:30px;border-radius:50%;background:#2e7d5b url(avatar.png) center/cover;flex:none}
+  .follow{border:1px solid rgba(255,255,255,.8);border-radius:8px;padding:4px 9px;font-size:12.5px;font-weight:600}
+  .reel-cap{font-size:13.5px;line-height:1.35;max-height:2.7em;overflow:hidden;cursor:pointer}
+  .reel-cap.open{max-height:260px;overflow-y:auto;white-space:pre-wrap;background:rgba(0,0,0,.35);border-radius:10px;padding:8px;
+                 scrollbar-width:thin}
+  .reel-cap .more{color:rgba(255,255,255,.75);font-weight:600}
+  .reel-cap .tag{font-weight:600}
+  .reel-audio{font-size:12.5px;opacity:.95}
+  .reel-scrub{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.3)}
+  .reel-scrub i{display:block;height:100%;width:0;background:#fff}
+  .fb .reel-bottom .follow{border:0;padding:0;font-size:13.5px}
+  .grid-tile{width:120px;aspect-ratio:3/4;border-radius:6px;overflow:hidden;background:#000;border:1px solid var(--line)}
+  .grid-tile img{width:100%;height:100%;object-fit:cover}
+
+  /* ---------- download panels ---------- */
+  .panel{padding:22px 28px 6px;max-width:1180px}
+  .panel h2{margin:0 0 4px;font-size:16px;font-weight:650}
+  .panel > p{margin:0 0 14px;color:var(--muted)}
+  .mini-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .mini{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:7px}
+  .mini img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:6px;display:block;background:#000}
+  .mini .t{display:flex;justify-content:space-between;font-size:12.5px}
+  .mini .t small{color:var(--muted)}
+  .mini .dl{flex-direction:column}
+  .mini .btn{justify-content:space-between}
+  .captionbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:14px}
+  .captionbox .row{margin-bottom:8px;flex-wrap:wrap}
+  .captionbox .count{color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+  .captionbox pre{margin:0;white-space:pre-wrap;font-family:inherit;font-size:13.5px;line-height:1.5;color:#d7dce1}
+  .reel-dl{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+  .chapters{display:flex;flex-wrap:wrap;gap:6px}
+  .chapters .chip small{font-variant-numeric:tabular-nums}
+
+  /* ---------- lightbox (Facebook grid) ---------- */
+  .lb{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:50;display:grid;place-items:center}
+  .lb[hidden]{display:none}
+  .lb figure{margin:0;max-width:min(92vw,560px);max-height:88vh;display:flex;flex-direction:column;gap:8px;align-items:center}
+  .lb img,.lb video{max-width:100%;max-height:80vh;border-radius:6px}
+  .lb figcaption{color:#ccc;font-size:13px}
+  .lb .nav{position:fixed;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;font-size:22px}
+  .lb .nav.l{left:18px}.lb .nav.r{right:18px}
+  .lb .x{position:fixed;top:14px;right:18px}
+  @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+<header>
+  <h1>COP31 Bike Ride — pregled objava</h1>
+  <p>Šumski Mir × Ulice za bicikliste. Kako story, objava i reel izgledaju na Instagramu i Facebooku, sa fajlovima za preuzimanje.</p>
+</header>
+<nav class="tabs" role="tablist" aria-label="Format objave">
+  <a href="#story" role="tab" data-tab="story">Story</a>
+  <a href="#objava" role="tab" data-tab="objava">Objava (karusel)</a>
+  <a href="#reel" role="tab" data-tab="reel">Reel</a>
+</nav>
+
+<main class="tab" id="tab-story" role="tabpanel">
+<p class="intro">Sedam story-ja, redom kako se objavljuju. Dodir na levu trećinu ekrana vraća, na ostatak ide napred; držanje pauzira — isto kao u aplikaciji. Stikeri se u pravoj objavi dodaju u aplikaciji.</p>
+<div class="stage" id="stage">
+  <div class="device">
+    <div class="device-label">Instagram Story</div>
+    <div class="phone ig" data-platform="ig">
+      <video playsinline muted preload="auto"></video>
+      <div class="shade-top"></div><div class="shade-bot"></div>
+      <div class="safe" style="top:0;height:calc(250px/3)"></div>
+      <div class="safe" style="bottom:0;height:calc(250px/3)"></div>
+      <div class="bars"></div>
+      <div class="head">
+        <div class="avatar" role="img" aria-label="Šumski Mir"></div>
+        <span class="name">sumski.mir</span><span class="time">2 min</span>
+        <span class="sp"></span><span class="icon">⋯</span><span class="icon">✕</span>
+      </div>
+      <div class="stickers"></div>
+      <div class="foot">
+        <div class="reply">Pošalji poruku</div>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.6-9.3-9.2C1.4 7.8 3.4 4.5 6.7 4.5c2.1 0 3.5 1.2 5.3 3.3 1.8-2.1 3.2-3.3 5.3-3.3 3.3 0 5.3 3.3 4 6.6-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 3.5 10.6 13.4M21.5 3.5l-7 17-3.9-7.1-7.1-3.9 18-6z"/></svg>
+      </div>
+      <div class="paused-badge" aria-hidden="true">❚❚</div>
+    </div>
+    <div class="meta" data-meta="ig"></div>
+  </div>
+
+  <div class="device">
+    <div class="device-label">Facebook Story</div>
+    <div class="phone fb" data-platform="fb">
+      <video playsinline muted preload="auto"></video>
+      <div class="shade-top"></div><div class="shade-bot"></div>
+      <div class="safe" style="top:0;height:calc(250px/3)"></div>
+      <div class="safe" style="bottom:0;height:calc(250px/3)"></div>
+      <div class="bars"></div>
+      <div class="head">
+        <div class="avatar" role="img" aria-label="Šumski Mir"></div>
+        <span class="name">Šumski Mir</span><span class="time">2 min · 🌐</span>
+        <span class="sp"></span><span class="icon">⋯</span><span class="icon">✕</span>
+      </div>
+      <div class="stickers"></div>
+      <div class="foot">
+        <div class="reply">Odgovori…</div>
+        <span class="react" aria-hidden="true">👍</span><span class="react" aria-hidden="true">❤️</span>
+      </div>
+      <div class="paused-badge" aria-hidden="true">❚❚</div>
+    </div>
+    <div class="meta" data-meta="fb"></div>
+  </div>
+</div>
+
+<div class="controls">
+  <button id="prev" aria-label="Prethodni story">⏮</button>
+  <button id="play" aria-label="Pauza">❚❚</button>
+  <button id="next" aria-label="Sledeći story">⏭</button>
+  <div class="chips" id="chips"></div>
+  <label class="toggle"><input type="checkbox" id="tStickers" checked> Stikeri</label>
+  <label class="toggle"><input type="checkbox" id="tSafe"> Bezbedna zona</label>
+</div>
+
+<section class="slides" aria-labelledby="slides-h">
+  <div class="slides-head">
+    <h2 id="slides-h">Slajdovi</h2>
+    <p>Preuzmi gotove fajlove i kopiraj tekst za svaki slajd.</p>
+    <span class="sp"></span>
+    <a class="btn primary" id="zip" download>Preuzmi sve story fajlove (ZIP) <small></small></a>
+  </div>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section class="notes">
+  <div class="note">
+    <h2>Objava, korak po korak</h2>
+    <ol>
+      <li>Objavi story-je <b>redom 01 → 07</b> sa naloga Šumskog Mira, na Instagramu i na Facebooku.</li>
+      <li>Na <b>06</b> dodaj dva <b>mention</b> stikera: <code>@ulicezabicikliste</code> i <code>@sumski.mir</code>.
+          UZB tako dobija obaveštenje i može story da podeli jednim dodirom.</li>
+      <li>Na <b>04</b> dodaj <b>link</b> stiker ka <code>copbikeride.org/cop31</code>.</li>
+      <li>Na <b>07</b> dodaj <b>link</b> stiker ka <code>izobilje.com/donate</code> — QR kod na plakatu ne može da se skenira telefonom na kome se gleda.</li>
+    </ol>
+  </div>
+  <div class="note">
+    <h2>Proveri pre objave</h2>
+    <ul>
+      <li><b>Instagram handle UZB-a</b> nije potvrđen — ni u njihovom registru naloga ga nema. Proveri ga pre mention stikera.</li>
+      <li>Story nema collab; UZB ga deli sa svog naloga preko mention obaveštenja.</li>
+      <li>Klipovi nemaju zvuk. Muziku, ako je želiš, dodaj u aplikaciji.</li>
+      <li>Story nestaje posle 24h — sačuvaj ga u Highlights ako treba duže.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<main class="tab" id="tab-objava" role="tabpanel" hidden>
+  <p class="intro">Svih 7 originalnih fajlova u jednoj objavi, svaki ceo, sa tvojim celim tekstom. Instagram ih prikazuje kao karusel koji se prevlači; Facebook više fotografija i videa u jednoj objavi prikazuje kao mrežu.</p>
+  <div class="stage">
+    <div class="device">
+      <div class="device-label">Instagram objava</div>
+      <div class="phone feed ig" id="igpost">
+        <div class="appbar"><span class="ig-word">Instagram</span><span class="icons"><svg viewBox="0 0 24 24"><path d="M12 20.3s-7.5-4.6-9.3-9.2C1.4 7.8 3.4 4.5 6.7 4.5c2.1 0 3.5 1.2 5.3 3.3 1.8-2.1 3.2-3.3 5.3-3.3 3.3 0 5.3 3.3 4 6.6-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3C6.8 3 3 6.7 3 11.4c0 2.5 1.1 4.7 2.9 6.2V21l3.1-1.7c1 .3 2 .4 3 .4 5.2 0 9-3.7 9-8.3S17.2 3 12 3z"/></svg></span></div>
+        <div class="ph"><div class="avs"><div class="av"></div><div class="av b">UZB</div></div>
+          <div class="who"><b>sumski.mir</b> i <b>ulicezabicikliste</b></div><span class="dots">⋯</span></div>
+        <div class="car">
+          <span class="car-count">1/7</span>
+          <button class="car-arrow l" aria-label="Prethodni slajd" disabled>‹</button>
+          <button class="car-arrow r" aria-label="Sledeći slajd">›</button>
+          <div class="car-track"></div>
+        </div>
+        <div class="actions"><svg viewBox="0 0 24 24"><path d="M12 20.3s-7.5-4.6-9.3-9.2C1.4 7.8 3.4 4.5 6.7 4.5c2.1 0 3.5 1.2 5.3 3.3 1.8-2.1 3.2-3.3 5.3-3.3 3.3 0 5.3 3.3 4 6.6-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg><svg viewBox="0 0 24 24"><path d="M20.7 17.3A9.5 9.5 0 1 0 17.3 20.7L21.5 21.5z"/></svg><svg viewBox="0 0 24 24"><path d="M21.5 3.5 10.6 13.4M21.5 3.5l-7 17-3.9-7.1-7.1-3.9 18-6z"/></svg><div class="car-dots"></div><span class="sp"></span><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></svg></div>
+        <div class="cap" data-cap="ig-post"></div>
+        <div class="when">UPRAVO</div>
+      </div>
+    </div>
+    <div class="device">
+      <div class="device-label">Facebook objava</div>
+      <div class="phone feed fb fb-bg" id="fbpost">
+        <div class="appbar"><span class="fb-word">facebook</span><span class="icons"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></svg><svg viewBox="0 0 24 24"><path d="M12 3C6.8 3 3 6.7 3 11.4c0 2.5 1.1 4.7 2.9 6.2V21l3.1-1.7c1 .3 2 .4 3 .4 5.2 0 9-3.7 9-8.3S17.2 3 12 3z"/></svg></span></div>
+        <article class="fbpost">
+          <div class="ph"><div class="avs"><div class="av"></div></div>
+            <div class="who"><b>Šumski Mir</b> i <b>Ulice za bicikliste</b><small>Upravo · 🌐</small></div><span class="dots">⋯</span></div>
+          <div class="fbcap" data-cap="fb-post"></div>
+          <div class="fbgrid"></div>
+          <div class="fbstats"><span>👍 Sviđa mi se</span><span>💬 Komentariši</span><span>↗ Podeli</span></div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <section class="panel" aria-labelledby="post-dl-h">
+    <div class="slides-head">
+      <h2 id="post-dl-h">Fajlovi za objavu</h2>
+      <p>Svi su 4:5 (1080×1350) — najviši format koji feed prikazuje.</p>
+      <span class="sp"></span>
+      <a class="btn primary" id="post-zip" download>Preuzmi svih 7 (ZIP) <small></small></a>
+    </div>
+    <div class="mini-grid" id="post-files"></div>
+    <div class="captionbox" data-captionbox></div>
+  </section>
+
+  <section class="notes">
+    <div class="note">
+      <h2>Instagram, korak po korak</h2>
+      <ol>
+        <li>Nova objava → izaberi više fajlova → označi <b>redom 01 → 07</b>.</li>
+        <li>Na prvom slajdu dodirni ikonu za format, da ostane <b>4:5</b>. Inače Instagram sve seče na kvadrat.</li>
+        <li>Nalepi opis.</li>
+        <li><b>Označi ljude → Pozovi saradnika</b> → UZB. Objava se pojavljuje i na njihovom profilu kad prihvate.</li>
+      </ol>
+    </div>
+    <div class="note">
+      <h2>Facebook, korak po korak</h2>
+      <ol>
+        <li>Nova objava na stranici Šumskog Mira → dodaj svih 7 fajlova, <b>redom</b>.</li>
+        <li>Nalepi opis. Facebook ga prikazuje iznad mreže fotografija.</li>
+        <li>Dodaj Ulice za bicikliste kao saradnika. Ako ta opcija nije ponuđena, označi ih u tekstu.</li>
+      </ol>
+    </div>
+    <div class="note">
+      <h2>Proveri pre objave</h2>
+      <ul>
+        <li><b>Instagram nalog UZB-a</b> nije potvrđen. Bez tačnog naloga nema ni collab-a, ni ispravnog @ u opisu.</li>
+        <li>Klipovi nemaju zvuk. Na Instagramu u karuselu možeš dodati muziku.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<main class="tab" id="tab-reel" role="tabpanel" hidden>
+  <p class="intro">Jedan video u kome se svih 7 fajlova smenjuje redom: klipovi idu celi, slike stoje po 3,5 sekunde. Klip kampa je sam 46 sekundi, pa reel traje 71 sekundu.</p>
+  <div class="stage">
+    <div class="device">
+      <div class="device-label">Instagram Reel</div>
+      <div class="phone ig" id="igreel">
+        <video playsinline muted loop preload="auto"></video>
+        <div class="shade-top"></div><div class="shade-bot" style="height:220px"></div>
+        <div class="reel-ui">
+          <div class="reel-top"><span>Reels</span><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.6"/><path d="M8.5 6l1.5-2.5h4L15.5 6"/></svg></div>
+          <div class="rail"><div><svg viewBox="0 0 24 24"><path d="M12 20.3s-7.5-4.6-9.3-9.2C1.4 7.8 3.4 4.5 6.7 4.5c2.1 0 3.5 1.2 5.3 3.3 1.8-2.1 3.2-3.3 5.3-3.3 3.3 0 5.3 3.3 4 6.6-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg><span>Sviđa se</span></div><div><svg viewBox="0 0 24 24"><path d="M20.7 17.3A9.5 9.5 0 1 0 17.3 20.7L21.5 21.5z"/></svg><span>0</span></div><div><svg viewBox="0 0 24 24"><path d="M21.5 3.5 10.6 13.4M21.5 3.5l-7 17-3.9-7.1-7.1-3.9 18-6z"/></svg></div><div><span class="emoji">⋯</span></div><div class="audio"></div></div>
+          <div class="reel-bottom">
+            <div class="reel-who"><span class="av"></span><span>sumski.mir i ulicezabicikliste</span><span class="follow">Prati</span></div>
+            <div class="reel-cap" data-cap="ig-reel"></div>
+            <div class="reel-audio">♫ sumski.mir · Originalni zvuk</div>
+          </div>
+          <div class="reel-scrub"><i></i></div>
+        </div>
+      </div>
+      <div class="meta" data-reel-meta></div>
+    </div>
+    <div class="device">
+      <div class="device-label">Facebook Reel</div>
+      <div class="phone fb" id="fbreel">
+        <video playsinline muted loop preload="auto"></video>
+        <div class="shade-top"></div><div class="shade-bot" style="height:220px"></div>
+        <div class="reel-ui">
+          <div class="reel-top"><span>Reels</span><span style="display:flex;gap:16px"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></svg><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.6"/><path d="M8.5 6l1.5-2.5h4L15.5 6"/></svg></span></div>
+          <div class="rail"><div><span class="emoji">👍</span><span>Sviđa mi se</span></div><div><svg viewBox="0 0 24 24"><path d="M20.7 17.3A9.5 9.5 0 1 0 17.3 20.7L21.5 21.5z"/></svg><span>0</span></div><div><svg viewBox="0 0 24 24"><path d="M14 4l7 7-7 7M21 11H10a7 7 0 0 0-7 7"/></svg><span>Podeli</span></div><div><span class="emoji">⋯</span></div></div>
+          <div class="reel-bottom">
+            <div class="reel-who"><span class="av"></span><span>Šumski Mir</span><span class="follow">· Prati</span></div>
+            <div class="reel-cap" data-cap="fb-reel"></div>
+            <div class="reel-audio">🎵 Šumski Mir · Originalni zvuk</div>
+          </div>
+          <div class="reel-scrub"><i></i></div>
+        </div>
+      </div>
+      <div class="meta">&nbsp;</div>
+    </div>
+    <div class="device" style="align-items:flex-start">
+      <div class="device-label">Na profilu (3:4)</div>
+      <div class="grid-tile"><img id="reel-cover-tile" alt="Naslovna slika reela, isečena kako je Instagram prikazuje na profilu"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="reel-play" aria-label="Pauza">❚❚</button>
+    <button id="reel-restart" aria-label="Od početka">⟲</button>
+    <div class="chapters chips" id="reel-chapters"></div>
+  </div>
+
+  <section class="panel" aria-labelledby="reel-dl-h">
+    <div class="slides-head">
+      <h2 id="reel-dl-h">Fajlovi za reel</h2>
+      <p>1080×1920, 30 fps, H.264 — isti fajl ide i na Instagram i na Facebook.</p>
+    </div>
+    <div class="reel-dl" id="reel-files"></div>
+    <div class="captionbox" data-captionbox></div>
+  </section>
+
+  <section class="notes">
+    <div class="note">
+      <h2>Instagram, korak po korak</h2>
+      <ol>
+        <li>Novi reel → izaberi <code>reel.mp4</code>.</li>
+        <li>Za naslovnu sliku izaberi kadar iz videa ili učitaj <code>cover.jpg</code>.</li>
+        <li>Nalepi opis. <b>Označi ljude → Pozovi saradnika</b> → UZB.</li>
+        <li>Opcija „Podeli i na Facebooku" objavljuje isti reel i na stranici, sa istim opisom.</li>
+      </ol>
+    </div>
+    <div class="note">
+      <h2>Proveri pre objave</h2>
+      <ul>
+        <li><b>Instagram nalog UZB-a</b> nije potvrđen.</li>
+        <li>Video nema zvuk. Muziku dodaj u aplikaciji — reel bez zvuka se lošije prikazuje.</li>
+        <li>71 sekunda je dugo za reel, jer klip kampa ide ceo. Ako želiš kraći, skratiću ga po tvom izboru.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Pregled fajla">
+  <button class="nav l" aria-label="Prethodni">‹</button>
+  <figure><div id="lb-media"></div><figcaption id="lb-cap"></figcaption></figure>
+  <button class="nav r" aria-label="Sledeći">›</button>
+  <button class="x" aria-label="Zatvori">✕</button>
+</div>
+
+<script>
+(async function () {
+  const data = await fetch("../out/manifest.json", {cache: "no-store"}).then(r => r.json());
+  const manifest = data.frames;
+  const PHONE_SCALE = 640 / 1920;
+  const phones = [...document.querySelectorAll("#tab-story .phone")].map(el => ({
+    el, platform: el.dataset.platform, video: el.querySelector("video"),
+    bars: el.querySelector(".bars"), stickers: el.querySelector(".stickers"),
+    meta: document.querySelector(`[data-meta="${el.dataset.platform}"]`)
+  }));
+  let idx = 0, paused = false;
+  const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+  // progress bars
+  phones.forEach(p => { p.bars.innerHTML = manifest.map(() => "<span><i></i></span>").join(""); });
+
+  // chips + file list
+  const chips = document.getElementById("chips");
+  chips.innerHTML = manifest.map((m, i) =>
+    `<button class="chip" data-i="${i}"><span>${m.id}</span><small>${m.duration.toFixed(1)} s</small></button>`).join("");
+  const mb = b => (b / 1e6 >= 1 ? (b / 1e6).toFixed(1) + " MB" : Math.round(b / 1e3) + " KB");
+  const base = f => f.split("/").pop();
+
+  const zip = document.getElementById("zip");
+  zip.href = "../" + data.zip; zip.setAttribute("download", base(data.zip));
+  zip.querySelector("small").textContent = mb(data.zip_bytes);
+
+  const cards = document.getElementById("cards");
+  cards.innerHTML = manifest.map((m, i) => {
+    const kind = m.jpg ? "fotografija" : "video";
+    const stickers = (m.stickers || []).map(s => {
+      const val = s.type === "link" ? (s.url || s.text) : s.text;
+      return `<div class="stk-item"><span class="stk-type">${s.type === "link" ? "link" : "mention"}</span>` +
+             `<code title="${esc(val)}">${esc(val)}</code>` +
+             `<button class="btn" data-copy="${esc(val)}">Kopiraj</button></div>`;
+    }).join("");
+    return `<article class="card" data-i="${i}">
+      <button class="thumb" data-show="${i}" aria-label="Prikaži slajd ${i + 1} u pregledu">
+        <img src="../${m.thumb}" alt="" loading="lazy"><span>${String(i + 1).padStart(2, "0")}</span></button>
+      <div class="card-body">
+        <div class="card-title"><b>${esc(m.id)}</b><small>${kind} · ${m.duration.toFixed(1)} s</small></div>
+        <div class="dl">
+          <a class="btn primary" href="../${m.file}" download="${base(m.file)}">Story MP4 <small>${mb(m.bytes)}</small></a>
+          ${m.jpg ? `<a class="btn" href="../${m.jpg}" download="${base(m.jpg)}">Kao slika JPG <small>${mb(m.jpg_bytes)}</small></a>` : ""}
+          <a class="btn" href="../${m.source}" download="original-${base(m.source)}">Original</a>
+        </div>
+        <div class="textbox${m.text ? "" : " empty"}">
+          <div class="row"><span class="label">Tekst na slajdu</span>
+            ${m.text ? `<button class="btn" data-copy-text="${i}">Kopiraj tekst</button>` : ""}</div>
+          <pre>${m.text ? esc(m.text) : "Bez teksta — plakat nosi svoj."}</pre>
+        </div>
+        ${stickers ? `<div class="stk"><span class="label">Stikeri za aplikaciju</span>${stickers}</div>` : ""}
+      </div></article>`;
+  }).join("");
+
+  async function copy(text, btn) {
+    try { await navigator.clipboard.writeText(text); }
+    catch (e) {                                   // clipboard API blocked: fall back to a selection copy
+      const ta = Object.assign(document.createElement("textarea"), {value: text});
+      ta.style.cssText = "position:fixed;opacity:0"; document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); ta.remove();
+    }
+    const was = btn.textContent;
+    btn.textContent = "Kopirano ✓"; btn.classList.add("copied");
+    setTimeout(() => { btn.textContent = was; btn.classList.remove("copied"); }, 1600);
+  }
+
+  window.retireMissingDownloads(document.getElementById("tab-story"));
+  window.retireMissingDownloads(document.querySelector(".slides-head"));
+
+  cards.addEventListener("click", e => {
+    const t = e.target.closest("[data-copy-text]");
+    if (t) return copy(manifest[+t.dataset.copyText].text, t);
+    const c = e.target.closest("[data-copy]");
+    if (c) return copy(c.dataset.copy, c);
+    const sh = e.target.closest("[data-show]");
+    if (sh) { show(+sh.dataset.show); window.scrollTo({top: 0, behavior: "smooth"}); }
+  });
+
+  const linkIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.2 1.2"/><path d="M14 10a5 5 0 0 0-7.1 0l-3 3a5 5 0 0 0 7.1 7.1l1.2-1.2"/></svg>';
+
+  function show(i) {
+    idx = (i + manifest.length) % manifest.length;
+    const m = manifest[idx];
+    phones.forEach(p => {
+      p.video.src = "../" + m.file;
+      p.video.currentTime = 0;
+      if (!paused) p.video.play().catch(() => {});
+      [...p.bars.children].forEach((s, k) => s.firstChild.style.width = k < idx ? "100%" : "0");
+      p.stickers.innerHTML = (m.stickers || []).map(s =>
+        `<div class="sticker ${s.type}" style="top:${s.y * PHONE_SCALE}px">` +
+        (s.type === "link" ? linkIcon + esc(s.text) : `<b>${esc(s.text)}</b>`) + `</div>`).join("");
+      p.meta.textContent = `${idx + 1}/${manifest.length} · ${m.id} · ${m.duration.toFixed(1)} s`;
+    });
+    [...chips.children].forEach((c, k) => c.setAttribute("aria-current", k === idx ? "true" : "false"));
+    [...document.querySelectorAll(".card")].forEach((c, k) => c.setAttribute("aria-current", k === idx ? "true" : "false"));
+  }
+
+  function setPaused(v) {
+    paused = v;
+    phones.forEach(p => { p.el.classList.toggle("is-paused", v); v ? p.video.pause() : p.video.play().catch(() => {}); });
+    const b = document.getElementById("play");
+    b.textContent = v ? "▶" : "❚❚"; b.setAttribute("aria-label", v ? "Pusti" : "Pauza");
+  }
+
+  // Instagram is the clock: when its video ends, both phones advance together.
+  phones[0].video.addEventListener("ended", () => show(idx + 1));
+  (function tick() {
+    phones.forEach(p => {
+      const d = p.video.duration || manifest[idx].duration;
+      const bar = p.bars.children[idx];
+      if (bar) bar.firstChild.style.width = Math.min(100, (p.video.currentTime / d) * 100) + "%";
+    });
+    requestAnimationFrame(tick);
+  })();
+
+  // Tap left third = back, elsewhere = forward, hold = pause (as in the apps).
+  phones.forEach(p => {
+    let downAt = 0, held = false, timer;
+    p.el.addEventListener("pointerdown", () => {
+      downAt = Date.now(); held = false;
+      timer = setTimeout(() => { held = true; phones.forEach(q => q.video.pause()); }, 220);
+    });
+    p.el.addEventListener("pointerup", e => {
+      clearTimeout(timer);
+      if (held) { if (!paused) phones.forEach(q => q.video.play().catch(() => {})); return; }
+      const r = p.el.getBoundingClientRect();
+      show((e.clientX - r.left) < r.width / 3 ? idx - 1 : idx + 1);
+    });
+    p.el.addEventListener("pointerleave", () => clearTimeout(timer));
+  });
+
+  document.getElementById("prev").onclick = () => show(idx - 1);
+  document.getElementById("next").onclick = () => show(idx + 1);
+  document.getElementById("play").onclick = () => setPaused(!paused);
+  chips.onclick = e => { const c = e.target.closest(".chip"); if (c) show(+c.dataset.i); };
+  document.getElementById("tStickers").onchange = e =>
+    document.getElementById("stage").classList.toggle("hide-stickers", !e.target.checked);
+  document.getElementById("tSafe").onchange = e =>
+    document.getElementById("stage").classList.toggle("show-safe", e.target.checked);
+  document.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") show(idx + 1);
+    if (e.key === "ArrowLeft") show(idx - 1);
+    if (e.key === " ") { e.preventDefault(); setPaused(!paused); }
+  });
+
+  document.addEventListener("tabchange", e => {
+    if (e.detail !== "story") phones.forEach(p => p.video.pause());
+    else if (!paused) phones.forEach(p => p.video.play().catch(() => {}));
+  });
+
+  // Browsers pause media in a hidden tab; resume where it was when the tab comes back.
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && !paused) phones.forEach(p => p.video.play().catch(() => {}));
+  });
+
+  show(0);
+})();
+</script>
+
+<script>
+(async function () {
+  const feed = await fetch("../feed/manifest.json", {cache: "no-store"}).then(r => r.json());
+  const items = feed.post.items;
+  const esc = t => t.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const mb = b => (b / 1e6 >= 1 ? (b / 1e6).toFixed(1) + " MB" : Math.round(b / 1e3) + " KB");
+  const base = f => f.split("/").pop();
+  const tags = t => esc(t).replace(/(^|[\s(])([#@][\wčćšđžČĆŠĐŽ.]+[\wčćšđž])/g, '$1<span class="tag">$2</span>');
+
+  // ---------- tabs ----------
+  const tabs = [...document.querySelectorAll(".tabs a")];
+  function selectTab(name) {
+    if (!["story", "objava", "reel"].includes(name)) name = "story";
+    tabs.forEach(a => a.setAttribute("aria-selected", a.dataset.tab === name ? "true" : "false"));
+    document.querySelectorAll("main.tab").forEach(m => m.hidden = m.id !== "tab-" + name);
+    document.dispatchEvent(new CustomEvent("tabchange", {detail: name}));
+  }
+  window.addEventListener("hashchange", () => selectTab(location.hash.slice(1)));
+
+  // ---------- captions: truncated like each app, full on tap ----------
+  const cap = feed.caption;
+  const firstLine = cap.split("\n")[0];
+  function truncate(text, n) {
+    if (text.length <= n) return text;
+    const cut = text.slice(0, n); return cut.slice(0, cut.lastIndexOf(" "));
+  }
+  function mountCaption(el, kind) {
+    const render = open => {
+      if (kind === "ig-post") {
+        el.innerHTML = `<b>sumski.mir</b> ` + (open ? tags(cap)
+          : tags(truncate(firstLine, 70)) + `… <button class="more">više</button>`);
+      } else if (kind === "fb-post") {
+        el.innerHTML = open ? tags(cap) : tags(truncate(cap, 230)) + `… <button class="more">Prikaži više</button>`;
+      } else {
+        el.innerHTML = open ? tags(cap) : tags(truncate(firstLine, 58)) + ` <span class="more">… ${kind === "ig-reel" ? "više" : "Više"}</span>`;
+        el.classList.toggle("open", open);
+      }
+    };
+    // Posts expand once, on "više"; a reel caption toggles on any tap — as in the apps.
+    let open = false;
+    const isReel = kind.endsWith("reel");
+    render(false);
+    el.addEventListener("click", e => {
+      if (!isReel && (open || !e.target.closest(".more"))) return;
+      open = !open;
+      render(open);
+    });
+  }
+  document.querySelectorAll("[data-cap]").forEach(el => mountCaption(el, el.dataset.cap));
+
+  // ---------- Instagram carousel ----------
+  const track = document.querySelector("#igpost .car-track");
+  track.innerHTML = items.map((it, i) => it.type === "video"
+    ? `<div class="car-item"><video src="../${it.file}" poster="../${it.thumb}" muted playsinline loop preload="metadata"></video><span class="vid-badge">▶</span></div>`
+    : `<div class="car-item"><img src="../${it.file}" alt="Slajd ${i + 1}" loading="lazy"></div>`).join("");
+  const dots = document.querySelector("#igpost .car-dots");
+  dots.innerHTML = items.map(() => "<i></i>").join("");
+  const count = document.querySelector("#igpost .car-count");
+  const [arrL, arrR] = document.querySelectorAll("#igpost .car-arrow");
+  let carIdx = 0;
+  function carUpdate() {
+    carIdx = Math.round(track.scrollLeft / track.clientWidth);
+    count.textContent = `${carIdx + 1}/${items.length}`;
+    [...dots.children].forEach((d, k) => d.classList.toggle("on", k === carIdx));
+    arrL.disabled = carIdx === 0; arrR.disabled = carIdx === items.length - 1;
+    track.querySelectorAll("video").forEach(v => {
+      const on = v.closest(".car-item") === track.children[carIdx] && !document.getElementById("tab-objava").hidden;
+      on ? v.play().catch(() => {}) : v.pause();
+    });
+  }
+  let scrollT; track.addEventListener("scroll", () => { clearTimeout(scrollT); scrollT = setTimeout(carUpdate, 80); });
+  arrL.onclick = () => track.scrollBy({left: -track.clientWidth, behavior: "smooth"});
+  arrR.onclick = () => track.scrollBy({left: track.clientWidth, behavior: "smooth"});
+  carUpdate();
+
+  // ---------- Facebook grid (2 on top, 3 below, "+N" on the last) ----------
+  const grid = document.querySelector("#fbpost .fbgrid");
+  const shown = items.slice(0, 5), extra = items.length - 5;
+  grid.innerHTML = shown.map((it, i) =>
+    `<button class="g ${i < 2 ? "top" : "bot"}" data-lb="${i}" aria-label="Otvori ${it.id}">
+       <img src="../${it.thumb}" alt="">${it.type === "video" ? '<span class="play">▶</span>' : ""}
+       ${i === 4 && extra > 0 ? `<span class="plus">+${extra}</span>` : ""}</button>`).join("");
+  // Grid tiles use the 4:5 files so the crop matches what Facebook shows from them.
+  grid.querySelectorAll("img").forEach((img, i) => {
+    if (items[i].type === "image") img.src = "../" + items[i].file;
+  });
+
+  // ---------- lightbox ----------
+  const lb = document.getElementById("lb"), lbMedia = document.getElementById("lb-media"), lbCap = document.getElementById("lb-cap");
+  let lbIdx = 0;
+  function lbShow(i) {
+    lbIdx = (i + items.length) % items.length; const it = items[lbIdx];
+    lbMedia.innerHTML = it.type === "video"
+      ? `<video src="../${it.file}" controls autoplay muted playsinline></video>` : `<img src="../${it.file}" alt="">`;
+    lbCap.textContent = `${lbIdx + 1}/${items.length} · ${it.id}`;
+  }
+  grid.addEventListener("click", e => { const g = e.target.closest("[data-lb]"); if (g) { lbShow(+g.dataset.lb); lb.hidden = false; lb.querySelector(".x").focus(); } });
+  lb.querySelector(".l").onclick = () => lbShow(lbIdx - 1);
+  lb.querySelector(".r").onclick = () => lbShow(lbIdx + 1);
+  const lbClose = () => { lb.hidden = true; lbMedia.innerHTML = ""; };
+  lb.querySelector(".x").onclick = lbClose;
+  lb.addEventListener("click", e => { if (e.target === lb) lbClose(); });
+  document.addEventListener("keydown", e => { if (!lb.hidden && e.key === "Escape") lbClose(); }, true);
+
+  // ---------- downloads + caption boxes ----------
+  const pz = document.getElementById("post-zip");
+  pz.href = "../" + feed.post.zip; pz.setAttribute("download", base(feed.post.zip));
+  pz.querySelector("small").textContent = mb(feed.post.zip_bytes);
+  document.getElementById("post-files").innerHTML = items.map((it, i) => `
+    <div class="mini">
+      <img src="../${it.thumb}" alt="">
+      <div class="t"><b>${String(i + 1).padStart(2, "0")}</b><small>${it.type === "video" ? "video · " + it.duration.toFixed(1) + " s" : "slika"}</small></div>
+      <div class="dl">
+        <a class="btn primary" href="../${it.file}" download="${base(it.file)}">4:5 ${it.type === "video" ? "MP4" : "JPG"} <small>${mb(it.bytes)}</small></a>
+        <a class="btn" href="../${it.source}" download="original-${base(it.source)}">Original</a>
+      </div>
+    </div>`).join("");
+
+  const r = feed.reel;
+  document.getElementById("reel-files").innerHTML = `
+    <div class="mini" style="width:170px"><img src="../${r.cover}" alt="" style="aspect-ratio:9/16">
+      <div class="dl">
+        <a class="btn primary" href="../${r.file}" download="cop31-reel.mp4">Reel MP4 <small>${mb(r.bytes)}</small></a>
+        <a class="btn" href="../${r.cover}" download="cop31-reel-cover.jpg">Naslovna JPG</a>
+      </div></div>`;
+  document.getElementById("reel-cover-tile").src = "../" + r.cover;
+  window.retireMissingDownloads(document.getElementById("tab-objava"));
+  window.retireMissingDownloads(document.getElementById("tab-reel"));
+
+  document.querySelectorAll("[data-captionbox]").forEach(box => {
+    box.innerHTML = `
+      <div class="row"><span class="label">Opis (ceo tekst)</span>
+        <span class="count">${feed.caption_chars}/2200 znakova · ${feed.hashtags}/30 hashtagova</span>
+        <span style="display:flex;gap:6px">
+          <button class="btn" data-copy-caption>Kopiraj opis</button>
+          <a class="btn" href="../${feed.caption_file}" download="cop31-opis.txt">Preuzmi .txt</a>
+        </span></div>
+      <pre>${esc(cap)}</pre>`;
+  });
+  document.addEventListener("click", async e => {
+    const b = e.target.closest("[data-copy-caption]"); if (!b) return;
+    try { await navigator.clipboard.writeText(cap); }
+    catch (err) {
+      const ta = Object.assign(document.createElement("textarea"), {value: cap});
+      ta.style.cssText = "position:fixed;opacity:0"; document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); ta.remove();
+    }
+    const was = b.textContent; b.textContent = "Kopirano ✓"; b.classList.add("copied");
+    setTimeout(() => { b.textContent = was; b.classList.remove("copied"); }, 1600);
+  });
+
+  // ---------- reels ----------
+  const reels = ["#igreel", "#fbreel"].map(sel => document.querySelector(sel + " video"));
+  reels.forEach(v => { v.src = "../" + r.file; });
+  let reelPaused = false;
+  const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
+  const chapters = document.getElementById("reel-chapters");
+  chapters.innerHTML = r.chapters.map((c, i) =>
+    `<button class="chip" data-t="${c.start}"><span>${c.id}</span><small>${fmt(c.start)} · ${c.duration.toFixed(1)} s</small></button>`).join("");
+  chapters.onclick = e => { const c = e.target.closest("[data-t]"); if (c) reels.forEach(v => { v.currentTime = +c.dataset.t; }); };
+  function reelSet(p) {
+    reelPaused = p;
+    reels.forEach(v => p ? v.pause() : v.play().catch(() => {}));
+    const b = document.getElementById("reel-play"); b.textContent = p ? "▶" : "❚❚"; b.setAttribute("aria-label", p ? "Pusti" : "Pauza");
+  }
+  document.getElementById("reel-play").onclick = () => reelSet(!reelPaused);
+  document.getElementById("reel-restart").onclick = () => { reels.forEach(v => v.currentTime = 0); reelSet(false); };
+  (function tick() {
+    const v = reels[0];
+    if (v.duration) {
+      document.querySelectorAll("#tab-reel .reel-scrub i").forEach(i => i.style.width = (v.currentTime / v.duration * 100) + "%");
+      reels[1].currentTime && Math.abs(reels[1].currentTime - v.currentTime) > 0.4 && (reels[1].currentTime = v.currentTime);
+      const cur = r.chapters.filter(c => c.start <= v.currentTime + 0.01).pop();
+      document.querySelector("[data-reel-meta]").textContent = `${fmt(v.currentTime)} / ${fmt(v.duration)} · ${cur ? cur.id : ""}`;
+      [...chapters.children].forEach(c => c.setAttribute("aria-current", cur && +c.dataset.t === cur.start ? "true" : "false"));
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  document.addEventListener("tabchange", e => {
+    if (e.detail === "reel") { if (!reelPaused) reels.forEach(v => v.play().catch(() => {})); }
+    else reels.forEach(v => v.pause());
+    carUpdate();
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && location.hash === "#reel" && !reelPaused) reels.forEach(v => v.play().catch(() => {}));
+  });
+
+  selectTab(location.hash.slice(1) || "story");
+})();
+</script>
+</body>
+</html>

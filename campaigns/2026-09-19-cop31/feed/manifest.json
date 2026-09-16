@@ -1,0 +1,126 @@
+{
+ "caption": "🚲 Biciklistička štafeta od Brazila do Turske ove nedelje prolazi kroz Srbiju.\n\nCOP31 Bike Ride vozi od Beléma, domaćina prošlog klimatskog samita, do Antalije, gde 9. novembra počinje COP31. Biciklisti nose deset predloga biciklističkih politika i od svakog grada kroz koji prođu traže tri konkretne obaveze sa rokom do 2035.\n\nSrpsku deonicu vozi nacionalni koordinator, treći put od 2023. godine, od granice do granice:\n\n🗓️ 15.09 Bačka Palanka → Sremski Karlovci\n🗓️ 16–17.09 → Beograd\n🗓️ 18.09 slobodan dan u Beogradu\n🗓️ 19.09 Beograd → Devojački bunar\n🗓️ 20.09 → Bela Crkva i granica sa Rumunijom\n\n🎬 PETAK 18.09, 18–19h — KC MAGACIN\nSlobodan dan na ruti nije pauza nego kampanja: povodom Evropske nedelje mobilnosti prikazujemo dokumentarni film o štafeti. Kraljevića Marka 4–8, Beograd.\n\n🚲 SUBOTA 19.09 — BEOGRAD → DEVOJAČKI BUNAR\nŠtafeta izlazi iz grada i vozi ka peščari. Priključite se! Ne morate ceo put, dovoljan je jedan dan ili jedna deonica. Prijavili su se i biciklisti iz inostranstva, pa društva neće nedostajati.\n\n⛺ PRENOĆIŠTE — ŠUMSKI MIR\nImamo 10 mesta za šatore. Ponesite svoju opremu za kampovanje. Čekaju vas zajednička kuhinja, tuš i regularan WC, zajedničko ognjište i borovi.\n\nZa sve informacije o vožnji, projekciji ili mestu u kampu, javite se u DM @ulicezabicikliste ili @sumski.mir.\n\n#copbikeride #ulicezabicikliste #sumskimir #izobilje #deliblatskapescara #evropskanedeljamobilnosti #biciklizam #odrzivamobilnost #klima #kampovanje",
+ "caption_chars": 1459,
+ "hashtags": 10,
+ "caption_file": "feed/caption.txt",
+ "post": {
+  "size": [
+   1080,
+   1350
+  ],
+  "items": [
+   {
+    "id": "01-granica",
+    "type": "image",
+    "file": "feed/post/01-granica.jpg",
+    "bytes": 269929,
+    "duration": null,
+    "thumb": "feed/post/thumbs/01-granica.jpg",
+    "source": "raw/01-granica.jpg"
+   },
+   {
+    "id": "02-biciklisti",
+    "type": "image",
+    "file": "feed/post/02-biciklisti.jpg",
+    "bytes": 522540,
+    "duration": null,
+    "thumb": "feed/post/thumbs/02-biciklisti.jpg",
+    "source": "raw/02-biciklisti.jpg"
+   },
+   {
+    "id": "03-kc-magacin",
+    "type": "image",
+    "file": "feed/post/03-kc-magacin.jpg",
+    "bytes": 256062,
+    "duration": null,
+    "thumb": "feed/post/thumbs/03-kc-magacin.jpg",
+    "source": "raw/03-kc-magacin.jpg"
+   },
+   {
+    "id": "04-staza",
+    "type": "video",
+    "file": "feed/post/04-staza.mp4",
+    "bytes": 4382239,
+    "duration": 7.53,
+    "thumb": "feed/post/thumbs/04-staza.jpg",
+    "source": "raw/10-staza.mp4"
+   },
+   {
+    "id": "05-kamp",
+    "type": "video",
+    "file": "feed/post/05-kamp.mp4",
+    "bytes": 55817180,
+    "duration": 46.23,
+    "thumb": "feed/post/thumbs/05-kamp.jpg",
+    "source": "raw/11-kamp-setnja.mp4"
+   },
+   {
+    "id": "06-kamp-borovi",
+    "type": "image",
+    "file": "feed/post/06-kamp-borovi.jpg",
+    "bytes": 429150,
+    "duration": null,
+    "thumb": "feed/post/thumbs/06-kamp-borovi.jpg",
+    "source": "raw/04-kamp-borovi.jpg"
+   },
+   {
+    "id": "07-plakat",
+    "type": "image",
+    "file": "feed/post/07-plakat.jpg",
+    "bytes": 281549,
+    "duration": null,
+    "thumb": "feed/post/thumbs/07-plakat.jpg",
+    "source": "raw/05-plakat-donacije.jpg"
+   }
+  ],
+  "zip": "feed/post/2026-09-cop31-devojacki-bunar-objava.zip",
+  "zip_bytes": 61959407
+ },
+ "reel": {
+  "size": [
+   1080,
+   1920
+  ],
+  "file": "feed/reel/reel.mp4",
+  "bytes": 65024519,
+  "duration": 71.4,
+  "cover": "feed/reel/cover.jpg",
+  "chapters": [
+   {
+    "id": "01-granica",
+    "start": 0.0,
+    "duration": 3.5
+   },
+   {
+    "id": "02-biciklisti",
+    "start": 3.5,
+    "duration": 3.5
+   },
+   {
+    "id": "03-kc-magacin",
+    "start": 7.0,
+    "duration": 3.5
+   },
+   {
+    "id": "04-staza",
+    "start": 10.5,
+    "duration": 7.53
+   },
+   {
+    "id": "05-kamp",
+    "start": 18.03,
+    "duration": 46.23
+   },
+   {
+    "id": "06-kamp-borovi",
+    "start": 64.27,
+    "duration": 3.5
+   },
+   {
+    "id": "07-plakat",
+    "start": 67.77,
+    "duration": 3.5
+   }
+  ]
+ }
+}

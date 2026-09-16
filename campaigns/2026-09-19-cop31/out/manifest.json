@@ -1,0 +1,115 @@
+{
+ "zip": "out/2026-09-cop31-devojacki-bunar-story.zip",
+ "zip_bytes": 60576399,
+ "frames": [
+  {
+   "id": "01-granica",
+   "file": "out/01-granica.mp4",
+   "duration": 5.0,
+   "bytes": 436247,
+   "jpg": "out/01-granica.jpg",
+   "jpg_bytes": 379667,
+   "source": "raw/01-granica.jpg",
+   "text": "COP31 BIKE RIDE\nOd Brazila do Turske.\nBiciklom.\nOve nedelje prolazi kroz Srbiju.",
+   "stickers": [],
+   "thumb": "out/thumbs/01-granica.jpg"
+  },
+  {
+   "id": "02-ruta",
+   "file": "out/02-ruta.mp4",
+   "duration": 8.0,
+   "bytes": 662971,
+   "jpg": "out/02-ruta.jpg",
+   "jpg_bytes": 555098,
+   "source": "raw/02-biciklisti.jpg",
+   "text": "15–20.09 · KROZ SRBIJU\nOd granice\ndo granice\n15.09  Bačka Palanka → Sremski Karlovci\n16–17.09  → Beograd\n18.09  slobodan dan u Beogradu\n19.09  Beograd → Devojački bunar\n20.09  → Bela Crkva, granica sa Rumunijom",
+   "stickers": [],
+   "thumb": "out/thumbs/02-ruta.jpg"
+  },
+  {
+   "id": "03-projekcija",
+   "file": "out/03-projekcija.mp4",
+   "duration": 7.0,
+   "bytes": 431889,
+   "jpg": "out/03-projekcija.jpg",
+   "jpg_bytes": 396030,
+   "source": "raw/03-kc-magacin.jpg",
+   "text": "PETAK 18.09 · 18–19h\nProjekcija u\nKC Magacin\nDokumentarni film o štafeti\nKraljevića Marka 4–8, Beograd\nEvropska nedelja mobilnosti",
+   "stickers": [],
+   "thumb": "out/thumbs/03-projekcija.jpg"
+  },
+  {
+   "id": "04-voznja",
+   "file": "out/04-voznja.mp4",
+   "duration": 7.53,
+   "bytes": 4430472,
+   "jpg": null,
+   "jpg_bytes": null,
+   "source": "raw/10-staza.mp4",
+   "text": "SUBOTA 19.09\nBeograd →\nDevojački bunar\nPriključi se — makar na jedan dan.",
+   "stickers": [
+    {
+     "type": "link",
+     "text": "copbikeride.org",
+     "url": "https://www.copbikeride.org/cop31",
+     "y": 1470
+    }
+   ],
+   "thumb": "out/thumbs/04-voznja.jpg"
+  },
+  {
+   "id": "05-kamp",
+   "file": "out/05-kamp.mp4",
+   "duration": 46.23,
+   "bytes": 53694339,
+   "jpg": null,
+   "jpg_bytes": null,
+   "source": "raw/11-kamp-setnja.mp4",
+   "text": "PRENOĆIŠTE · ŠUMSKI MIR\n10 mesta\nza šatore\nPonesi svoju opremu za kampovanje.\nZajednička kuhinja, tuš i regularan WC,\nzajedničko ognjište i borovi.",
+   "stickers": [],
+   "thumb": "out/thumbs/05-kamp.jpg"
+  },
+  {
+   "id": "06-informacije",
+   "file": "out/06-informacije.mp4",
+   "duration": 6.0,
+   "bytes": 580163,
+   "jpg": "out/06-informacije.jpg",
+   "jpg_bytes": 509721,
+   "source": "raw/04-kamp-borovi.jpg",
+   "text": "INFORMACIJE U DM\nUlice za bicikliste\n× Šumski Mir\nVožnja, projekcija, mesto u kampu",
+   "stickers": [
+    {
+     "type": "mention",
+     "text": "@ulicezabicikliste",
+     "y": 1250
+    },
+    {
+     "type": "mention",
+     "text": "@sumski.mir",
+     "y": 1370
+    }
+   ],
+   "thumb": "out/thumbs/06-informacije.jpg"
+  },
+  {
+   "id": "07-donacije",
+   "file": "out/07-donacije.mp4",
+   "duration": 6.0,
+   "bytes": 339566,
+   "jpg": "out/07-donacije.jpg",
+   "jpg_bytes": 335738,
+   "source": "raw/05-plakat-donacije.jpg",
+   "text": "",
+   "stickers": [
+    {
+     "type": "link",
+     "text": "izobilje.com/donate",
+     "url": "https://izobilje.com/donate",
+     "y": 1580
+    }
+   ],
+   "thumb": "out/thumbs/07-donacije.jpg"
+  }
+ ]
+}
