@@ -111,4 +111,4 @@ if (errors.length) {
   for (const e of errors) console.error("  - " + e);
   process.exit(1);
 }
-console.log(`✓ ${contentPath} is a valid proposal-hub content instance (chassis 2.0.0).`);
+console.log(`✓ ${contentPath} is a valid proposal-hub content instance (chassis 2.1.0).`);

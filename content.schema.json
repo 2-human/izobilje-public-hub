@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://2-human.com/schema/proposal-hub/content.schema.json",
   "title": "proposal-hub content instance (window.HUB)",
-  "description": "The config contract for a proposal-hub pitch. A content.js assigns window.HUB to an object of this shape; the chassis (hub.html) renders entirely from it. Validate with: node validate-content.mjs [content.js]. Chassis version: 2.0.0.",
+  "description": "The config contract for a proposal-hub pitch. A content.js assigns window.HUB to an object of this shape; the chassis (hub.html) renders entirely from it. Validate with: node validate-content.mjs [content.js]. Chassis version: 2.1.0.",
   "type": "object",
   "required": ["agency", "brand", "defaultView", "nav", "VIEWS", "STAGES", "html"],
   "properties": {
